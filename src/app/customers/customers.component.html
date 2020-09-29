@@ -1,0 +1,11 @@
+<h1>customers works!</h1>
+
+<div *ngFor="let customer of customers">
+    <b>{{customer.id}}-{{customer.name}}</b>
+  
+    <ul>
+        <li>{{customer.address}}</li>
+        <li>{{customer.zipcode}}</li>
+        <li>{{customer.city}}</li>
+    </ul>
+  </div>
