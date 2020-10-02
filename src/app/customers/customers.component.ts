@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService, CustomerService } from '../_services';
 import { Customer } from '../_models/customer';
 import { first } from 'rxjs/operators';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+// import { faFilm } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-customers',
@@ -16,6 +18,7 @@ export class CustomersComponent implements OnInit {
   customers: Customer[];
   loading = false;
   submitted = false;
+  trashIcon = faTrash;
 
   constructor(
     private apiService: CustomerService,

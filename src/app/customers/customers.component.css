@@ -10,3 +10,11 @@ table thead{
 .invalid_error{
     height: 50px;
 }
+
+.trash-icon{
+    color: red;
+}
+
+a.icon-container{
+    padding: unset;
+}

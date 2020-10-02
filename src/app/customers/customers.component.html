@@ -97,7 +97,7 @@
                         <td>{{customer.address}}</td>
                         <td>{{customer.zipcode}}</td>
                         <td>{{customer.city}}</td>
-                        <td><a class="btn" type="button" (click)="onDelete(customer.id)"><i class="fas fa-trash-alt"></i></a></td>
+                        <td><a class="btn icon-container" type="button" (click)="onDelete(customer.id)"><fa-icon class="trash-icon" [icon]="trashIcon"></fa-icon></a></td>
                     </tr>
                 </tbody>
             </table>
