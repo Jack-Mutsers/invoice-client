@@ -1,0 +1,8 @@
+div.spacer{
+    height: 75px;
+    width: 100%;
+}
+
+table thead{
+    background-color: rgb(160, 160, 160);
+}

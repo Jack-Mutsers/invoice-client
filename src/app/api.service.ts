@@ -25,7 +25,7 @@ export class ApiService {
     return this.httpClient.post(`http://localhost:9090/useraccount/login`, JSON.stringify(userdata));
   }
 
-  public getUser(){
-    return this.httpClient.get(`http://localhost:9090/useraccount/`);
+  public getUser(id){
+    return this.httpClient.get(`http://localhost:9090/useraccount/` + id);
   }
 }

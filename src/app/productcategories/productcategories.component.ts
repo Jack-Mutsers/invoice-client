@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
+import { ProductCategory } from '../_models/productcategory';
 
 @Component({
   selector: 'app-productcategories',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductcategoriesComponent implements OnInit {
 
-  constructor() { }
+  productCatogories: ProductCategory[];
+
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
+    this.apiService.getProductCategory().subscribe((data)=>{
+      console.log(data);
+      this.productCatogories = <ProductCategory[]> data;
+    });
   }
 
 }

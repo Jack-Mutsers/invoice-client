@@ -1,1 +1,25 @@
-<p>products works!</p>
+<div class="spacer"></div>
+<div class="container">
+    <h2>products works!</h2>
+    <br>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>price</th>
+                <th>productCode</th>
+                <th>category name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products">
+                <th>{{product.id}}</th>
+                <td>{{product.name}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.productCode}}</td>
+                <td>{{product.category.name}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

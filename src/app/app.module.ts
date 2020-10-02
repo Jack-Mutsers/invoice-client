@@ -9,6 +9,10 @@ import { ProductsComponent } from './products/products.component';
 import { ProductcategoriesComponent } from './productcategories/productcategories.component';
 import { UsersComponent } from './users/users.component';
 import { UseraccountsComponent } from './useraccounts/useraccounts.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
+// import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -17,12 +21,16 @@ import { UseraccountsComponent } from './useraccounts/useraccounts.component';
     ProductsComponent,
     ProductcategoriesComponent,
     UsersComponent,
-    UseraccountsComponent
+    UseraccountsComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    // AngularFontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
