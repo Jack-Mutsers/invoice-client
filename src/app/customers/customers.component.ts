@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService, CustomerService } from '../_services';
 import { Customer } from '../_models/customer';
 import { first } from 'rxjs/operators';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 // import { faFilm } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -16,9 +16,11 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 export class CustomersComponent implements OnInit {
   customerForm: FormGroup;
   customers: Customer[];
+  formCustomer: Customer = new Customer(0, null, null, null, null);
   loading = false;
   submitted = false;
   trashIcon = faTrash;
+  pencilIcon = faPencilAlt;
 
   constructor(
     private apiService: CustomerService,
@@ -31,6 +33,7 @@ export class CustomersComponent implements OnInit {
     this.loadCustomers();
 
     this.customerForm = this.formBuilder.group({
+      id: ['', Validators.required],
       name: ['', Validators.required],
       address: ['', Validators.required],
       zipcode: ['', Validators.required],
@@ -50,22 +53,50 @@ export class CustomersComponent implements OnInit {
     }
 
     this.loading = true;
-    this.apiService.addCustomer(this.customerForm.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.alertService.success('Registration successful', true);
-          this.loading = false;
-          this.loadCustomers();
-          this.submitted = false;
-          this.customerForm.reset();
-        },
-        error => {
-          this.alertService.error(error);
-          this.loading = false;
-        }
-      );
+    let id = this.customerForm.value.id;
+    if(id == 0 || id == null || id == undefined){
+      this.apiService.addCustomer(this.customerForm.value)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.alertService.success('Registration successful', true);
+            this.loading = false;
+            this.loadCustomers();
+            this.submitted = false;
+            this.customerForm.reset();
+            console.log(this.formCustomer);
+          },
+          error => {
+            this.alertService.error(error);
+            this.loading = false;
+          }
+        );
+    }else{
+      this.apiService.update(id, this.customerForm.value)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.alertService.success('Update successful', true);
+            this.loading = false;
+            this.loadCustomers();
+            this.submitted = false;
+            this.customerForm.reset();
+            console.log(this.formCustomer);
+          },
+          error => {
+            this.alertService.error(error);
+            this.loading = false;
+          }
+        );
+    }
 
+  }
+
+  onEdit(id){
+    this.apiService.getCustomer(id).subscribe((data)=>{
+      console.log(data);
+      this.formCustomer = <Customer> data;
+    });
   }
 
   onDelete(id){

@@ -6,14 +6,14 @@
     <div class="row">
         <div class="col-md-12">
             <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
-
+                <input type="hidden" formControlName="id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }"  [(ngModel)]="formCustomer.id">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-2">
                             <label for="name">Name*</label>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                            <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" [(ngModel)]="formCustomer.name" />
                             <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                                 <div *ngIf="f.name.errors.required">Name is required</div>
                             </div>
@@ -27,7 +27,7 @@
                             <label for="address">address*</label>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
+                            <input type="text" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" [(ngModel)]="formCustomer.address" />
                             <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
                                 <div *ngIf="f.address.errors.required">Address is required</div>
                             </div>
@@ -41,7 +41,7 @@
                             <label for="zipcode">zipcode*</label>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" formControlName="zipcode" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.zipcode.errors }" />
+                            <input type="text" formControlName="zipcode" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.zipcode.errors }" [(ngModel)]="formCustomer.zipcode" />
                             <div *ngIf="submitted && f.zipcode.errors" class="invalid-feedback">
                                 <div *ngIf="f.zipcode.errors.required">Zipcode is required</div>
                             </div>
@@ -55,7 +55,7 @@
                             <label for="city">city*</label>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+                            <input type="text" formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" [(ngModel)]="formCustomer.city" />
                             <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
                                 <div *ngIf="f.city.errors.required">City is required</div>
                             </div>
@@ -88,6 +88,7 @@
                         <th>zipcode</th>
                         <th>city</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -97,6 +98,7 @@
                         <td>{{customer.address}}</td>
                         <td>{{customer.zipcode}}</td>
                         <td>{{customer.city}}</td>
+                        <td><a class="btn icon-container" type="button" (click)="onEdit(customer.id)"><fa-icon class="trash-icon" [icon]="pencilIcon"></fa-icon></a></td>
                         <td><a class="btn icon-container" type="button" (click)="onDelete(customer.id)"><fa-icon class="trash-icon" [icon]="trashIcon"></fa-icon></a></td>
                     </tr>
                 </tbody>
