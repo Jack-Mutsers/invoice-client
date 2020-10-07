@@ -16,6 +16,8 @@ import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 export class CustomersComponent implements OnInit {
   customerForm: FormGroup;
   customers: Customer[];
+  deleteCustomer: Customer = new Customer(0, null, null, null, null);
+  alterationTile: string = "Add new";
   formCustomer: Customer = new Customer(0, null, null, null, null);
   loading = false;
   submitted = false;
@@ -81,6 +83,7 @@ export class CustomersComponent implements OnInit {
             this.loadCustomers();
             this.submitted = false;
             this.customerForm.reset();
+            this.alterationTile = "Add new";
             console.log(this.formCustomer);
           },
           error => {
@@ -96,6 +99,7 @@ export class CustomersComponent implements OnInit {
     this.apiService.getCustomer(id).subscribe((data)=>{
       console.log(data);
       this.formCustomer = <Customer> data;
+      this.alterationTile = "Update";
     });
   }
 
@@ -106,6 +110,11 @@ export class CustomersComponent implements OnInit {
         this.loadCustomers();
       }
     );
+  }
+
+  onSetDeleteData(id){
+    this. deleteCustomer = this.customers.filter(x => x.id === id)[0];
+    console.log(this.deleteCustomer);
   }
 
   private loadCustomers(){
