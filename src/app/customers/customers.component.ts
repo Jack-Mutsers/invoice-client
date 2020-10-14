@@ -65,7 +65,8 @@ export class CustomersComponent implements OnInit {
             this.loading = false;
             this.loadCustomers();
             this.submitted = false;
-            this.customerForm.reset();
+            // this.customerForm.reset();
+            this.formCustomer = new Customer(0, null, null, null, null);
             console.log(this.formCustomer);
           },
           error => {
@@ -82,7 +83,8 @@ export class CustomersComponent implements OnInit {
             this.loading = false;
             this.loadCustomers();
             this.submitted = false;
-            this.customerForm.reset();
+            // this.customerForm.reset();
+            this.formCustomer = new Customer(0, null, null, null, null);
             this.alterationTile = "Add new";
             console.log(this.formCustomer);
           },

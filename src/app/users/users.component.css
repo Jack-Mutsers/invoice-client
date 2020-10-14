@@ -2,3 +2,19 @@ div.spacer{
     height: 75px;
     width: 100%;
 }
+
+table thead{
+    background-color: rgb(160, 160, 160);
+}
+
+.invalid_error{
+    height: 50px;
+}
+
+.trash-icon{
+    color: red;
+}
+
+a.icon-container{
+    padding: unset;
+}
