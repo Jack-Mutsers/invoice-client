@@ -12,10 +12,10 @@ import { ProductCategory } from './productcategory';
 export class Product{
     constructor(
         public id: number = 0,
-        public name: string,
-        public price: number,
-        public categoryId: number,
-        public productCode: string,
-        public category: ProductCategory = new ProductCategory(0, null, null),
+        public name: string = null,
+        public price: number = null,
+        public categoryId: number = 0,
+        public productCode: string = null,
+        public category: ProductCategory = new ProductCategory()
     ) {  }
 }

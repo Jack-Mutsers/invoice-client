@@ -10,10 +10,10 @@ import { User } from './user';
 
 export class UserAccount{
     constructor(
-        public id: number = 0,
-        public username: string,
-        public password: string,
-        public userId: number,
-        public user: User,
+        // public id: number = 0,
+        public username: string = null,
+        public password: string = null
+        // public userId: number = 0,
+        // public user: User = new User()
     ) {  }
 }

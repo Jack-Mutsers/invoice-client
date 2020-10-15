@@ -7,7 +7,7 @@
 export class ProductCategory{
     constructor(
         public id: number = 0,
-        public name: string,
-        public btw: number
+        public name: string = null,
+        public btw: number = null
     ) {  }
 }

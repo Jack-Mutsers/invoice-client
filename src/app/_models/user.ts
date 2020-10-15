@@ -10,10 +10,10 @@
 export class User{
     constructor(
         public id: number = 0,
-        public name: string,
-        public address: string,
-        public zipcode: string,
-        public city: string,
-        public po_box: string,
+        public name: string = null,
+        public address: string = null,
+        public zipcode: string = null,
+        public city: string = null,
+        public po_box: string = null
     ) {  }
 }

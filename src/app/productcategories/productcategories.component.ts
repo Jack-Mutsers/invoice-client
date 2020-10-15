@@ -16,9 +16,9 @@ import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 export class ProductcategoriesComponent implements OnInit {
   productcategoryForm: FormGroup;
   productCatogories: ProductCategory[];
-  deleteProductCategory: ProductCategory = new ProductCategory(0, null, null);
+  deleteProductCategory: ProductCategory = new ProductCategory();
   alterationTile: string = "Add new";
-  formProductCategory: ProductCategory = new ProductCategory(0, null, null);
+  formProductCategory: ProductCategory = new ProductCategory();
   loading = false;
   submitted = false;
   trashIcon = faTrash;
@@ -66,7 +66,7 @@ export class ProductcategoriesComponent implements OnInit {
             this.loadProductCategories();
             this.submitted = false;
             // this.productcategoryForm.reset();
-            this.formProductCategory = new ProductCategory(0, null, null);
+            this.formProductCategory = new ProductCategory();
             console.log(this.formProductCategory);
           },
           error => {
@@ -84,7 +84,7 @@ export class ProductcategoriesComponent implements OnInit {
             this.loadProductCategories();
             this.submitted = false;
             // this.productcategoryForm.reset();
-            this.formProductCategory = new ProductCategory(0, null, null);
+            this.formProductCategory = new ProductCategory();
             this.alterationTile = "Add new";
             console.log(this.formProductCategory);
           },

@@ -16,9 +16,9 @@ import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 export class CustomersComponent implements OnInit {
   customerForm: FormGroup;
   customers: Customer[];
-  deleteCustomer: Customer = new Customer(0, null, null, null, null);
+  deleteCustomer: Customer = new Customer();
   alterationTile: string = "Add new";
-  formCustomer: Customer = new Customer(0, null, null, null, null);
+  formCustomer: Customer = new Customer();
   loading = false;
   submitted = false;
   trashIcon = faTrash;
@@ -66,7 +66,7 @@ export class CustomersComponent implements OnInit {
             this.loadCustomers();
             this.submitted = false;
             // this.customerForm.reset();
-            this.formCustomer = new Customer(0, null, null, null, null);
+            this.formCustomer = new Customer();
             console.log(this.formCustomer);
           },
           error => {
@@ -84,7 +84,7 @@ export class CustomersComponent implements OnInit {
             this.loadCustomers();
             this.submitted = false;
             // this.customerForm.reset();
-            this.formCustomer = new Customer(0, null, null, null, null);
+            this.formCustomer = new Customer();
             this.alterationTile = "Add new";
             console.log(this.formCustomer);
           },
