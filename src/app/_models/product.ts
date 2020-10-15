@@ -16,6 +16,6 @@ export class Product{
         public price: number,
         public categoryId: number,
         public productCode: string,
-        public category: ProductCategory,
+        public category: ProductCategory = new ProductCategory(0, null, null),
     ) {  }
 }
