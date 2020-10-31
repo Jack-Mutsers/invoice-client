@@ -18,8 +18,8 @@ export class ProductCategoryService {
         return this.http.post(`http://localhost:9090/productcategory`, productcategory);
     }
 
-    update(id: number, productcategory: ProductCategory) {
-        return this.http.put(`http://localhost:9090/productcategory/${id}`, productcategory);
+    update(productcategory: ProductCategory) {
+        return this.http.put(`http://localhost:9090/productcategory`, productcategory);
     }
 
     delete(id: number) {

@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit {
               data => {
                 var userdata: UserAccount = new UserAccount();
                 userdata.loadFromObject(data);
-                console.log(userdata);
                 this.router.navigate([this.returnUrl]);
               },
               error => {

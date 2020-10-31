@@ -49,11 +49,9 @@ export class ProductcategoriesComponent implements OnInit {
     
     // stop here if form is invalid
     if (this.productcategoryForm.invalid) {
-      console.log("Form input invalid");
       return;
     }
     
-    console.log("test");
     this.loading = true;
     let id = this.productcategoryForm.value.id;
     if(id == 0 || id == null || id == undefined){
@@ -67,7 +65,6 @@ export class ProductcategoriesComponent implements OnInit {
             this.submitted = false;
             // this.productcategoryForm.reset();
             this.formProductCategory = new ProductCategory();
-            console.log(this.formProductCategory);
           },
           error => {
             this.alertService.error(error);
@@ -75,7 +72,7 @@ export class ProductcategoriesComponent implements OnInit {
           }
         );
     }else{
-      this.apiService.update(id, this.productcategoryForm.value)
+      this.apiService.update(this.productcategoryForm.value)
         .pipe(first())
         .subscribe(
           data => {
@@ -86,7 +83,6 @@ export class ProductcategoriesComponent implements OnInit {
             // this.productcategoryForm.reset();
             this.formProductCategory = new ProductCategory();
             this.alterationTile = "Add new";
-            console.log(this.formProductCategory);
           },
           error => {
             this.alertService.error(error);
@@ -99,14 +95,12 @@ export class ProductcategoriesComponent implements OnInit {
 
   onEdit(id){
     this.apiService.getProductCategory(id).subscribe((data)=>{
-      //console.log(data);
       this.formProductCategory = <ProductCategory> data;
       this.alterationTile = "Update";
     });
   }
 
   onDelete(id){
-    //console.log(id);
     this.apiService.delete(id).subscribe(
       data => {
         this.loadProductCategories();
@@ -116,12 +110,10 @@ export class ProductcategoriesComponent implements OnInit {
 
   onSetDeleteData(id){
     this. deleteProductCategory = this.productCatogories.filter(x => x.id === id)[0];
-    //console.log(this.deleteProductCategory);
   }
 
   private loadProductCategories(){
     this.apiService.getProductCategorys().subscribe((data)=>{
-      //console.log(data);
       this.productCatogories = <ProductCategory[]> data;
     });
   }

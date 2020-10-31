@@ -18,8 +18,8 @@ export class CustomerService {
         return this.http.post(`http://localhost:9090/customers`, customer);
     }
 
-    update(id: number, customer: Customer) {
-        return this.http.put(`http://localhost:9090/customers/${id}`, customer);
+    update(customer: Customer) {
+        return this.http.put(`http://localhost:9090/customers/`, customer);
     }
 
     delete(id: number) {

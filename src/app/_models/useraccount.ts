@@ -9,18 +9,29 @@ export interface IUseraccount{
 }
 
 export class UserAccount implements IUseraccount{
-    constructor(
-        public id: number = 0,
-        public username: string = null,
-        public password: string = null,
-        public userId: number = 0,
-        public user: User = new User()
-    ) {  }
+    id = 0;
+    username = null;
+    password = null;
+    userId = 0;
+    user = new User();
 
     public loadFromObject(object){
         this.id = object.id;
         this.username = object.username;
         this.userId = object.userId;
         this.user = object.user;
+    }
+
+    public loadFromForm(object){
+        this.username = object.username;
+        this.password = object.password;
+
+        var user = new User();
+        user.name = object.name;
+        user.address = object.address;
+        user.city = object.city;
+        user.zipcode = object.zipcode;
+
+        this.user = user;
     }
 }

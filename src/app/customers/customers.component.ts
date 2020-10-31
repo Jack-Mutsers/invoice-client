@@ -67,7 +67,6 @@ export class CustomersComponent implements OnInit {
             this.submitted = false;
             // this.customerForm.reset();
             this.formCustomer = new Customer();
-            console.log(this.formCustomer);
           },
           error => {
             this.alertService.error(error);
@@ -75,7 +74,7 @@ export class CustomersComponent implements OnInit {
           }
         );
     }else{
-      this.apiService.update(id, this.customerForm.value)
+      this.apiService.update(this.customerForm.value)
         .pipe(first())
         .subscribe(
           data => {
@@ -86,7 +85,6 @@ export class CustomersComponent implements OnInit {
             // this.customerForm.reset();
             this.formCustomer = new Customer();
             this.alterationTile = "Add new";
-            console.log(this.formCustomer);
           },
           error => {
             this.alertService.error(error);
@@ -99,14 +97,12 @@ export class CustomersComponent implements OnInit {
 
   onEdit(id){
     this.apiService.getCustomer(id).subscribe((data)=>{
-      console.log(data);
       this.formCustomer = <Customer> data;
       this.alterationTile = "Update";
     });
   }
 
   onDelete(id){
-    console.log(id);
     this.apiService.delete(id).subscribe(
       data => {
         this.loadCustomers();
@@ -116,12 +112,11 @@ export class CustomersComponent implements OnInit {
 
   onSetDeleteData(id){
     this. deleteCustomer = this.customers.filter(x => x.id === id)[0];
-    console.log(this.deleteCustomer);
+    (this.deleteCustomer);
   }
 
   private loadCustomers(){
     this.apiService.getCustomers().subscribe((data)=>{
-      console.log(data);
       this.customers = <Customer[]> data;
     });
   }

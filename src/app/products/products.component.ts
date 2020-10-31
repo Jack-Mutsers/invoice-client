@@ -51,7 +51,6 @@ export class ProductsComponent implements OnInit {
     
     // stop here if form is invalid
     if (this.productForm.invalid) {
-      console.log("Form input invalid");
       return;
     }
     
@@ -68,7 +67,6 @@ export class ProductsComponent implements OnInit {
             this.submitted = false;
             // this.productForm.reset();
             this.formProduct = new Product();
-            console.log(this.formProduct);
           },
           error => {
             this.alertService.error(error);
@@ -76,7 +74,7 @@ export class ProductsComponent implements OnInit {
           }
         );
     }else{
-      this.apiService.update(id, this.productForm.value)
+      this.apiService.update(this.productForm.value)
         .pipe(first())
         .subscribe(
           data => {
@@ -87,7 +85,6 @@ export class ProductsComponent implements OnInit {
             // this.productForm.reset();
             this.formProduct = new Product();
             this.alterationTile = "Add new";
-            console.log(this.formProduct);
           },
           error => {
             this.alertService.error(error);
@@ -100,14 +97,12 @@ export class ProductsComponent implements OnInit {
 
   onEdit(id){
     this.apiService.getProduct(id).subscribe((data)=>{
-      //console.log(data);
       this.formProduct = <Product> data;
       this.alterationTile = "Update";
     });
   }
 
   onDelete(id){
-    //console.log(id);
     this.apiService.delete(id).subscribe(
       data => {
         this.loadProductCategories();
@@ -117,12 +112,10 @@ export class ProductsComponent implements OnInit {
 
   onSetDeleteData(id){
     this. deleteProduct = this.products.filter(x => x.id === id)[0];
-    //console.log(this.deleteProduct);
   }
 
   private loadProductCategories(){
     this.apiService.getProducts().subscribe((data)=>{
-      //console.log(data);
       this.products = <Product[]> data;
     });
   }
