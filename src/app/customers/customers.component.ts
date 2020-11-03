@@ -5,7 +5,6 @@ import { AlertService, CustomerService } from '../_services';
 import { Customer } from '../_models/customer';
 import { first } from 'rxjs/operators';
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-// import { faFilm } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-customers',
@@ -112,7 +111,6 @@ export class CustomersComponent implements OnInit {
 
   onSetDeleteData(id){
     this. deleteCustomer = this.customers.filter(x => x.id === id)[0];
-    (this.deleteCustomer);
   }
 
   private loadCustomers(){

@@ -6,7 +6,6 @@ import { AlertService, ProductService } from '../_services';
 import { first } from 'rxjs/operators';
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
-
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -119,5 +118,4 @@ export class ProductsComponent implements OnInit {
       this.products = <Product[]> data;
     });
   }
-
 }
