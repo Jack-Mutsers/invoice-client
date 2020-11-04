@@ -5,3 +5,5 @@ export * from './product.service';
 export * from './useraccount.service';
 export * from './user.service';
 export * from './authentication.service';
+export * from './message.service';
+export * from './company.service';

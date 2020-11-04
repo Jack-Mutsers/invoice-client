@@ -1,28 +1,34 @@
 import { User } from './user';
+import { Company } from './company';
 
 export interface IUseraccount{
     id: number;
     username: string;
     password: string;
-    userId: number;
+    contactCode: string;
     user: User;
+    company: Company;
 }
 
 export class UserAccount implements IUseraccount{
     id = 0;
     username = null;
     password = null;
-    userId = 0;
+    contactCode = null;
     user = new User();
-
+    company = new Company();
+ 
+    // load from api response
     public loadFromObject(object){
         this.id = object.id;
         this.username = object.username;
-        this.userId = object.userId;
+        this.contactCode = object.contactCode;
         this.user = object.user;
+        this.company = object.company;
     }
 
-    public loadFromForm(object){
+    // load with html form data
+    public loadFromForm(object){ 
         this.username = object.username;
         this.password = object.password;
 

@@ -17,6 +17,7 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { HomeComponent } from './home/home.component';
 import { UseraccountComponent } from './useraccount/useraccount.component';
 import { ConnectionsComponent } from './connections/connections.component';
+import { CompanyComponent } from './company/company.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ConnectionsComponent } from './connections/connections.component';
     HomeComponent,
     UseraccountComponent,
     ConnectionsComponent,
+    CompanyComponent,
   ],
   imports: [
     BrowserModule,
