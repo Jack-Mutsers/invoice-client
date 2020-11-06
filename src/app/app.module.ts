@@ -18,7 +18,7 @@ import { HomeComponent } from './components/home/home.component';
 import { UseraccountComponent } from './components/useraccount/useraccount.component';
 import { ConnectionsComponent } from './components/connections/connections.component';
 import { CompanyComponent } from './components/company/company.component';
-import { AlertComponent } from './_directive/alert.component';
+import { AlertComponent } from './_directives/alert.component';
 import { AuthGuard } from './_guards';
 import { AlertService, AuthenticationService, UserService } from './_services';
 import { HomeLayoutComponent } from './layouts/home-layout/home-layout.component';
