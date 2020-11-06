@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertService, CustomerService } from '../_services';
-import { Customer } from '../_models/customer';
+import { AlertService, CustomerService } from '../../_services';
+import { Customer } from '../../_models/customer';
 import { first } from 'rxjs/operators';
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 

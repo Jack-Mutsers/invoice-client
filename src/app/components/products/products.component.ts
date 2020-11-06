@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../_models/product';
+import { Product } from '../../_models/product';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertService, ProductCategoryService, ProductService } from '../_services';
+import { AlertService, ProductCategoryService, ProductService } from '../../_services';
 import { first } from 'rxjs/operators';
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import { ProductCategory } from '../_models/productcategory';
+import { ProductCategory } from '../../_models/productcategory';
 
 @Component({
   selector: 'app-products',
