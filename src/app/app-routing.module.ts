@@ -11,16 +11,22 @@ import { ProductsComponent } from './components/products/products.component';
 import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
-  {path:'customers', component: CustomersComponent, canActivate: [AuthGuard]},
-  {path:'products', component: ProductsComponent, canActivate: [AuthGuard]},
-  {path:'productcategories', component: ProductcategoriesComponent, canActivate: [AuthGuard]},
-  {path:'register', component: RegisterComponent},
-  {path:'login', component: LoginComponent},
-  {path:'', component: HomeComponent, canActivate: [AuthGuard]}
+  {path:'', component: HomeLayoutComponent, canActivate: [AuthGuard], children: [
+    {path:'customers', component: CustomersComponent},
+    {path:'products', component: ProductsComponent},
+    {path:'productcategories', component: ProductcategoriesComponent},
+    {path:'', component: HomeComponent}
+  ]},
+  {path:'', component: LoginLayoutComponent, children: [
+    {path:'login', component: LoginComponent},
+    {path:'register', component: RegisterComponent}
+  ]},
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }

@@ -21,6 +21,9 @@ import { CompanyComponent } from './components/company/company.component';
 import { AlertComponent } from './_directive/alert.component';
 import { AuthGuard } from './_guards';
 import { AlertService, AuthenticationService, UserService } from './_services';
+import { HomeLayoutComponent } from './layouts/home-layout/home-layout.component';
+import { LoginLayoutComponent } from './layouts/login-layout/login-layout.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,9 @@ import { AlertService, AuthenticationService, UserService } from './_services';
     UseraccountComponent,
     ConnectionsComponent,
     CompanyComponent,
+    HomeLayoutComponent,
+    LoginLayoutComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
