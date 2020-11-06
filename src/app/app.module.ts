@@ -18,10 +18,14 @@ import { HomeComponent } from './home/home.component';
 import { UseraccountComponent } from './useraccount/useraccount.component';
 import { ConnectionsComponent } from './connections/connections.component';
 import { CompanyComponent } from './company/company.component';
+import { AlertComponent } from './_directive/alert.component';
+import { AuthGuard } from './_guards';
+import { AlertService, AuthenticationService, UserService } from './_services';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AlertComponent,
     CustomersComponent,
     ProductsComponent,
     ProductcategoriesComponent,
@@ -39,7 +43,12 @@ import { CompanyComponent } from './company/company.component';
     ReactiveFormsModule,
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    AlertService,
+    AuthenticationService,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

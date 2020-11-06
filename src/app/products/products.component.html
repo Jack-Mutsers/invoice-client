@@ -51,10 +51,14 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-2">
-                            <label for="categoryId">category id*</label>
+                            <label for="categoryId">category</label>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" formControlName="categoryId" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.categoryId.errors }" [(ngModel)]="formProduct.category.id" />
+
+                            <select formControlName="categoryId" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.categoryId.errors }" [(ngModel)]="formProduct.category.id">
+                                <option *ngFor="let category of productCategories" value="{{category.id}}">{{category.name}}</option>
+                            </select>
+
                             <div *ngIf="submitted && f.categoryId.errors" class="invalid-feedback">
                                 <div *ngIf="f.categoryId.errors.required">categoryId is required</div>
                             </div>

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../_models/product';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertService, ProductService } from '../_services';
+import { AlertService, ProductCategoryService, ProductService } from '../_services';
 import { first } from 'rxjs/operators';
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { ProductCategory } from '../_models/productcategory';
 
 @Component({
   selector: 'app-products',
@@ -15,6 +16,7 @@ import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 export class ProductsComponent implements OnInit {
   productForm: FormGroup;
   products: Product[];
+  productCategories: ProductCategory[];
   deleteProduct: Product = new Product();
   alterationTile: string = "Add new";
   formProduct: Product = new Product();
@@ -24,13 +26,15 @@ export class ProductsComponent implements OnInit {
   pencilIcon = faPencilAlt;
 
   constructor(
-    private apiService: ProductService,
+    private productApiService: ProductService,
+    private categoryApiService: ProductCategoryService,
     private router: Router,
     private formBuilder: FormBuilder,
     private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
+    this.loadProducts();
     this.loadProductCategories();
 
     this.productForm = this.formBuilder.group({
@@ -56,7 +60,7 @@ export class ProductsComponent implements OnInit {
     this.loading = true;
     let id = this.productForm.value.id;
     if(id == 0 || id == null || id == undefined){
-      this.apiService.addProduct(this.productForm.value)
+      this.productApiService.addProduct(this.productForm.value)
         .pipe(first())
         .subscribe(
           data => {
@@ -73,7 +77,7 @@ export class ProductsComponent implements OnInit {
           }
         );
     }else{
-      this.apiService.update(this.productForm.value)
+      this.productApiService.update(this.productForm.value)
         .pipe(first())
         .subscribe(
           data => {
@@ -95,14 +99,14 @@ export class ProductsComponent implements OnInit {
   }
 
   onEdit(id){
-    this.apiService.getProduct(id).subscribe((data)=>{
+    this.productApiService.getProduct(id).subscribe((data)=>{
       this.formProduct = <Product> data;
       this.alterationTile = "Update";
     });
   }
 
   onDelete(id){
-    this.apiService.delete(id).subscribe(
+    this.productApiService.delete(id).subscribe(
       data => {
         this.loadProductCategories();
       }
@@ -113,9 +117,15 @@ export class ProductsComponent implements OnInit {
     this. deleteProduct = this.products.filter(x => x.id === id)[0];
   }
 
-  private loadProductCategories(){
-    this.apiService.getProducts().subscribe((data)=>{
+  private loadProducts(){
+    this.productApiService.getProducts().subscribe((data)=>{
       this.products = <Product[]> data;
+    });
+  }
+
+  private loadProductCategories(){
+    this.categoryApiService.getProductCategorys().subscribe((data)=>{
+      this.productCategories = <ProductCategory[]> data;
     });
   }
 }

@@ -15,10 +15,12 @@ export class ProductService {
     }
 
     addProduct(product: Product) {
+        console.log(product);
         return this.http.post(`http://localhost:9090/products`, product);
     }
 
     update(product: Product) {
+        console.log(product);
         return this.http.put(`http://localhost:9090/products`, product);
     }
 
