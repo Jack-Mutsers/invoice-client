@@ -5,11 +5,7 @@ import { UserAccount } from '../_models/useraccount';
 @Injectable({ providedIn: 'root' })
 export class UserAccountService {
     constructor(private http: HttpClient) { }
-    
-    Login(useraccount: UserAccount){
-        return this.http.post(`http://localhost:9090/useraccount/login`, useraccount);
-    }
-    
+        
     addUserAccount(useraccount: UserAccount) {
         return this.http.post(`http://localhost:9090/useraccount`, useraccount);
     }

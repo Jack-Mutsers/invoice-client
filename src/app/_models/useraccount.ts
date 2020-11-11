@@ -8,6 +8,7 @@ export interface IUseraccount{
     contactCode: string;
     user: User;
     company: Company;
+    token?: string;
 }
 
 export class UserAccount implements IUseraccount{
@@ -17,6 +18,7 @@ export class UserAccount implements IUseraccount{
     contactCode = null;
     user = new User();
     company = new Company();
+    token? = null;
  
     // load from api response
     public loadFromObject(object){
