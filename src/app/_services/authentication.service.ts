@@ -20,17 +20,18 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
+        var authdata = `Basic ${btoa(username + ':' + password)}`;
         var header = {
             headers: new HttpHeaders()
-            .set('Authorization',  `Basic ${btoa(username + ':' + password)}`)
+            .set('Authorization', authdata )
+            // withCredentials: true
         }
 
-
-        return this.http.post<any>(`http://localhost:9090/useraccount/login`, header)
+        return this.http.post<any>(`http://localhost:9090/authenticate`, {username: username, password: password}, header)
             .pipe(map(user => {
-                if (user /*&& user.token*/) {
+                if (user && user.token){
                     // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
-                    user.authdata = `Basic ${window.btoa(username + ':' + password)}`
+                    user.authdata = authdata;
                     localStorage.setItem('currentUser', JSON.stringify(user));
                     this.currentUserSubject.next(user);
                     return user;

@@ -7,6 +7,7 @@ export class UserAccountService {
     constructor(private http: HttpClient) { }
         
     addUserAccount(useraccount: UserAccount) {
+        console.log(JSON.stringify(useraccount));
         return this.http.post(`http://localhost:9090/useraccount`, useraccount);
     }
 
