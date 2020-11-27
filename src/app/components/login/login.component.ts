@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { Role } from '../../_models';
 
 import { AlertService, AuthenticationService } from '../../_services';
 import { UserAccount } from '../../_models/useraccount';
@@ -58,7 +59,12 @@ export class LoginComponent implements OnInit {
             data => {
               var userdata: UserAccount = new UserAccount();
               userdata.loadFromObject(data);
-              this.router.navigate([this.returnUrl]);
+
+              if(userdata.role == Role.Owner || userdata.role == Role.Employee){
+                this.router.navigate(["/company/"]);
+              }else{
+                this.router.navigate(["/"]);
+              }
             },
             error => {
               console.log(error);

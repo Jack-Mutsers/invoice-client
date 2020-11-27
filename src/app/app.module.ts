@@ -20,9 +20,9 @@ import { CompanyComponent } from './components/company/company.component';
 import { AlertComponent } from './_directives/alert.component';
 import { AuthGuard } from './_helpers';
 import { AlertService, AuthenticationService, UserService } from './_services';
+import { CompanyLayoutComponent } from './layouts/company-layout/company-layout.component';
 import { HomeLayoutComponent } from './layouts/home-layout/home-layout.component';
 import { LoginLayoutComponent } from './layouts/login-layout/login-layout.component';
-import { HeaderComponent } from './components/header/header.component';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -39,9 +39,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     UseraccountComponent,
     ConnectionsComponent,
     CompanyComponent,
+    CompanyLayoutComponent,
     HomeLayoutComponent,
     LoginLayoutComponent,
-    HeaderComponent
   ],
   imports: [
     BrowserModule,

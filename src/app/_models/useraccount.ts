@@ -7,6 +7,7 @@ export interface IUseraccount{
     password: string;
     contactCode: string;
     user: User;
+    companyId: number;
     company: Company;
     token?: string;
 }
@@ -17,7 +18,9 @@ export class UserAccount implements IUseraccount{
     password = null;
     contactCode = null;
     user = new User();
+    companyId = 0;
     company = new Company();
+    role = null;
     token? = null;
  
     // load from api response
@@ -26,7 +29,9 @@ export class UserAccount implements IUseraccount{
         this.username = object.username;
         this.contactCode = object.contactCode;
         this.user = object.user;
+        this.companyId = object.companyId;
         this.company = object.company;
+        this.role = object.role;
     }
 
     // load with html form data
