@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AlertService, UserAccountService, UserService } from '../../_services';
-import { UserAccount } from '../../_models/useraccount';
+import { UserAccount } from '../../_models';
 
 @Component({
   selector: 'app-register',

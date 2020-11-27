@@ -10,6 +10,7 @@ import { CustomersComponent } from './components/customers/customers.component';
 import { ProductcategoriesComponent } from './components/productcategories/productcategories.component';
 import { ProductsComponent } from './components/products/products.component';
 import { RegisterComponent } from './components/register/register.component';
+import { CompanyregistrationComponent } from './components/companyregistration/companyregistration.component';
 import { Role } from './_models';
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
     {path:'', component: HomeComponent}
   ]},
   {path:'', component: HomeLayoutComponent, canActivate: [AuthGuard], data: { roles: [Role.User] }, children: [
+    {path:'register-company', component: CompanyregistrationComponent},
     {path:'', component: HomeComponent}
   ]},
   {path:'', component: LoginLayoutComponent, children: [
