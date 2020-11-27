@@ -60,7 +60,8 @@ export class CustomersComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            this.alertService.success('Registration successful', true);
+            console.log(data.message);
+            this.alertService.success(data.message, true);
             this.loading = false;
             this.loadCustomers();
             this.submitted = false;
@@ -68,7 +69,8 @@ export class CustomersComponent implements OnInit {
             this.formCustomer = new Customer();
           },
           error => {
-            this.alertService.error(error);
+            console.log(error.message);
+            this.alertService.error(error.message);
             this.loading = false;
           }
         );
@@ -77,7 +79,8 @@ export class CustomersComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            this.alertService.success('Update successful', true);
+            console.log(data.message);
+            this.alertService.success(data.message, true);
             this.loading = false;
             this.loadCustomers();
             this.submitted = false;
@@ -86,7 +89,8 @@ export class CustomersComponent implements OnInit {
             this.alterationTile = "Add new";
           },
           error => {
-            this.alertService.error(error);
+            console.log(error.message);
+            this.alertService.error(error.message);
             this.loading = false;
           }
         );
@@ -104,7 +108,13 @@ export class CustomersComponent implements OnInit {
   onDelete(id){
     this.apiService.delete(id).subscribe(
       data => {
+        console.log(data.message);
+        this.alertService.success(data.message, true);
         this.loadCustomers();
+      },
+      error => {
+        console.log(error.message);
+        this.alertService.error(error.message);
       }
     );
   }

@@ -27,8 +27,9 @@ export class AuthenticationService {
             // withCredentials: true
         }
 
-        return this.http.post<any>(`http://localhost:9090/authenticate`, {username: username, password: password}, header)
-            .pipe(map(user => {
+        return this.http.post<any>(`http://localhost:9090/authenticate`, null, header)
+            .pipe(map(response => {
+                var user = response.body;
                 if (user && user.token){
                     // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
                     user.authdata = authdata;

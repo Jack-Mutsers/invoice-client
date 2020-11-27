@@ -64,7 +64,8 @@ export class ProductsComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            this.alertService.success('Registration successful', true);
+            console.log(data.message);
+            this.alertService.success(data.message, true);
             this.loading = false;
             this.loadProductCategories();
             this.submitted = false;
@@ -72,7 +73,8 @@ export class ProductsComponent implements OnInit {
             this.formProduct = new Product();
           },
           error => {
-            this.alertService.error(error);
+            console.log(error.message);
+            this.alertService.error(error.message);
             this.loading = false;
           }
         );
@@ -81,7 +83,8 @@ export class ProductsComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            this.alertService.success('Update successful', true);
+            console.log(data.message);
+            this.alertService.success(data.message, true);
             this.loading = false;
             this.loadProductCategories();
             this.submitted = false;
@@ -90,7 +93,8 @@ export class ProductsComponent implements OnInit {
             this.alterationTile = "Add new";
           },
           error => {
-            this.alertService.error(error);
+            console.log(error.message);
+            this.alertService.error(error.message);
             this.loading = false;
           }
         );
@@ -108,7 +112,13 @@ export class ProductsComponent implements OnInit {
   onDelete(id){
     this.productApiService.delete(id).subscribe(
       data => {
+        console.log(data.message);
+        this.alertService.success(data.message, true);
         this.loadProductCategories();
+      },
+      error => {
+        console.log(error.message);
+        this.alertService.error(error.message);
       }
     );
   }

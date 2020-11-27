@@ -53,16 +53,18 @@ export class LoginComponent implements OnInit {
 
       this.loading = true;
       this.authenticationService.login(this.f.username.value, this.f.password.value)
-          .pipe(first())
-          .subscribe(
-              data => {
-                var userdata: UserAccount = new UserAccount();
-                userdata.loadFromObject(data);
-                this.router.navigate([this.returnUrl]);
-              },
-              error => {
-                  this.alertService.error(error);
-                  this.loading = false;
-              });
+        .pipe(first())
+        .subscribe(
+            data => {
+              var userdata: UserAccount = new UserAccount();
+              userdata.loadFromObject(data);
+              this.router.navigate([this.returnUrl]);
+            },
+            error => {
+              console.log(error);
+              this.alertService.error(error);
+              this.loading = false;
+            }
+        );
   }
 }
