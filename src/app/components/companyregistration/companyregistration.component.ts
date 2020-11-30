@@ -57,6 +57,7 @@ export class CompanyregistrationComponent implements OnInit {
         .subscribe(
           data => {
             userAccount.role = Role.Owner;
+            userAccount.companyId = data.id;
             localStorage.setItem('currentUser', JSON.stringify(userAccount));
             this.router.navigate(["/company/"]);
           },
