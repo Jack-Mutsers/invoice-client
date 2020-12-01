@@ -7,8 +7,8 @@ import { map } from 'rxjs/operators';
 export class CustomerService {
     constructor(private http: HttpClient) { }
     
-    getCustomers(companyId: number){
-        return this.http.get<any>(`http://localhost:9090/customers/${companyId}`)
+    getCustomers(){
+        return this.http.get<any>(`http://localhost:9090/customers`)
         .pipe(map(response => {
             if(response.status){
                 return response.body;
@@ -16,8 +16,8 @@ export class CustomerService {
         }));
     }
     
-    getCustomer(id: number, companyId: number){
-        return this.http.get<any>(`http://localhost:9090/customers/${id}/${companyId}`)
+    getCustomer(id: number){
+        return this.http.get<any>(`http://localhost:9090/customers/${id}`)
         .pipe(map(response => {
             if(response.status){
                 return response.body;
@@ -34,7 +34,7 @@ export class CustomerService {
         return this.http.put<any>(`http://localhost:9090/customers/`, customer);
     }
 
-    delete(id: number, companyId: number) {
-        return this.http.delete<any>(`http://localhost:9090/customers/${id}/${companyId}`);
+    delete(id: number) {
+        return this.http.delete<any>(`http://localhost:9090/customers/${id}`);
     }
 }

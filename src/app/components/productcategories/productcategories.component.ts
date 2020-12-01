@@ -122,9 +122,16 @@ export class ProductcategoriesComponent implements OnInit {
   }
 
   private loadProductCategories(){
-    this.apiService.getProductCategorys().subscribe((data)=>{
-      this.productCatogories = <ProductCategory[]> data;
-    });
+    this.apiService.getProductCategorys().subscribe(
+      data =>{
+        this.productCatogories = <ProductCategory[]> data;
+        console.log(this.productCatogories);
+      },
+      error => {
+        console.log(error);
+        this.alertService.error(error.message);
+      }
+    );
   }
 
 }

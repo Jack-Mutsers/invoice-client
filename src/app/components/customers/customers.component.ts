@@ -22,7 +22,6 @@ export class CustomersComponent implements OnInit {
   submitted = false;
   trashIcon = faTrash;
   pencilIcon = faPencilAlt;
-  companyId = JSON.parse(localStorage.getItem('currentUser')).companyId;
 
   constructor(
     private apiService: CustomerService,
@@ -55,7 +54,6 @@ export class CustomersComponent implements OnInit {
     }
 
     var customer = this.customerForm.value;
-    customer.companyId = this.companyId;
     
     this.loading = true;
     let id = this.customerForm.value.id;
@@ -103,14 +101,14 @@ export class CustomersComponent implements OnInit {
   }
 
   onEdit(id){
-    this.apiService.getCustomer(id, this.companyId).subscribe((data)=>{
+    this.apiService.getCustomer(id).subscribe((data)=>{
       this.formCustomer = <Customer> data;
       this.alterationTile = "Update";
     });
   }
 
   onDelete(id){
-    this.apiService.delete(id, this.companyId).subscribe(
+    this.apiService.delete(id).subscribe(
       data => {
         console.log(data.message);
         this.alertService.success(data.message, true);
@@ -128,7 +126,7 @@ export class CustomersComponent implements OnInit {
   }
 
   private loadCustomers(){
-    this.apiService.getCustomers(this.companyId).subscribe((data)=>{
+    this.apiService.getCustomers().subscribe((data)=>{
       this.customers = <Customer[]> data;
     });
   }

@@ -67,7 +67,7 @@ export class ProductsComponent implements OnInit {
             console.log(data.message);
             this.alertService.success(data.message, true);
             this.loading = false;
-            this.loadProductCategories();
+            this.loadProducts();
             this.submitted = false;
             // this.productForm.reset();
             this.formProduct = new Product();
@@ -86,7 +86,7 @@ export class ProductsComponent implements OnInit {
             console.log(data.message);
             this.alertService.success(data.message, true);
             this.loading = false;
-            this.loadProductCategories();
+            this.loadProducts();
             this.submitted = false;
             // this.productForm.reset();
             this.formProduct = new Product();
@@ -114,7 +114,7 @@ export class ProductsComponent implements OnInit {
       data => {
         console.log(data.message);
         this.alertService.success(data.message, true);
-        this.loadProductCategories();
+        this.loadProducts();
       },
       error => {
         console.log(error.message);
@@ -135,6 +135,7 @@ export class ProductsComponent implements OnInit {
 
   private loadProductCategories(){
     this.categoryApiService.getProductCategorys().subscribe((data)=>{
+      console.log(data);
       this.productCategories = <ProductCategory[]> data;
     });
   }
