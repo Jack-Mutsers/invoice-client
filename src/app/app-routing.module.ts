@@ -12,16 +12,19 @@ import { ProductsComponent } from './components/products/products.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CompanyregistrationComponent } from './components/companyregistration/companyregistration.component';
 import { Role } from './_models';
+import { InvoicesComponent } from './components/invoices/invoices.component';
 
 const routes: Routes = [
   {path:'company', component: CompanyLayoutComponent, canActivate: [AuthGuard], data: { roles: [Role.Owner, Role.Employee] }, children: [
     {path:'customers', component: CustomersComponent},
     {path:'products', component: ProductsComponent},
     {path:'productcategories', component: ProductcategoriesComponent},
+    {path:'invoices', component: InvoicesComponent},
     {path:'', component: HomeComponent}
   ]},
   {path:'', component: HomeLayoutComponent, canActivate: [AuthGuard], data: { roles: [Role.User] }, children: [
     {path:'register-company', component: CompanyregistrationComponent},
+    {path:'invoices', component: InvoicesComponent},
     {path:'', component: HomeComponent}
   ]},
   {path:'', component: LoginLayoutComponent, children: [

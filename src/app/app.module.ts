@@ -26,6 +26,7 @@ import { LoginLayoutComponent } from './layouts/login-layout/login-layout.compon
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CompanyregistrationComponent } from './components/companyregistration/companyregistration.component';
+import { InvoicesComponent } from './components/invoices/invoices.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { CompanyregistrationComponent } from './components/companyregistration/c
     HomeLayoutComponent,
     LoginLayoutComponent,
     CompanyregistrationComponent,
+    InvoicesComponent,
   ],
   imports: [
     BrowserModule,
