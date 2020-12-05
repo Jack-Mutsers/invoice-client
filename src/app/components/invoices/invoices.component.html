@@ -1,1 +1,103 @@
-<p>invoices works!</p>
+
+
+<h2>Invocies</h2>
+<br>
+<h3>Invoice Upload</h3>
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <form [formGroup]="fileRecordForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <div class="row">
+
+                    <div class="col-md-2">
+                        <label for="name">Files</label>
+                    </div>
+                    <div class="col-md-4">
+                        <div style="text-align:center;">
+
+                            <mat-card class="custom-form-control">  
+                                <mat-card-content>  
+                                    <ul>  
+                                        <li *ngFor="let file of files">  
+                                            <mat-progress-bar [value]="file.progress"></mat-progress-bar>  
+                                            <span id="file-label">  
+                                                {{file.filename}}
+                                            </span>  
+                                        </li>  
+                                    </ul>  
+                                </mat-card-content>  
+                                <mat-card-actions>  
+                                    <button mat-button color="warn" type="button" (click)="onClick()">  
+                                        Upload  
+                                    </button>  
+                                </mat-card-actions>  
+                            </mat-card>
+                        
+                            <input type="file" #fileUpload id="fileUpload" name="fileUpload" multiple="multiple" accept="application/pdf" style="display:none;" />
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="name">Customer</label>
+                    </div>
+                    <div class="col-md-4">
+                        <select formControlName="contactCode" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.contactCode.errors }" [(ngModel)]="formFileRecord.contactCode">
+                            <option value="">-- select custormer --</option>
+                            <option *ngFor="let customer of customers" value="{{customer.contactCode}}">{{customer.name}}</option>
+                        </select>
+
+                        <div *ngIf="submitted && f.contactCode.errors" class="invalid-feedback">
+                            <div *ngIf="f.contactCode.errors.required">Customer selection is required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Store
+                </button>
+                <!-- <a routerLink="/customers" class="btn btn-link">Cancel</a> -->
+            </div>
+        </form>
+    </div>
+</div>
+
+<hr>
+
+<h3>product list</h3>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>File Type</th>
+                    <th>Creation Date</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let fileRecord of MyfileRecords">
+                    <td>{{fileRecord.name}}</td>
+                    <td>{{fileRecord.fileType}}</td>
+                    <td>{{fileRecord.creationDate}}</td>
+                    <td><a class="btn icon-container" type="button" (click)="onDownload(fileRecord.url, fileRecord.name)"><fa-icon class="trash-icon" [icon]="downloadIcon"></fa-icon></a></td>
+                    <td><a class="btn icon-container" type="button" data-toggle="modal" data-target="#delete_modal" data-ng-click="Clear()" (click)="onSetDeleteData(product.id)"><fa-icon class="trash-icon" [icon]="trashIcon"></fa-icon></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+

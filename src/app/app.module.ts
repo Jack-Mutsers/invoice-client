@@ -27,6 +27,12 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CompanyregistrationComponent } from './components/companyregistration/companyregistration.component';
 import { InvoicesComponent } from './components/invoices/invoices.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule  } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -52,7 +58,13 @@ import { InvoicesComponent } from './components/invoices/invoices.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,  
+    MatIconModule,  
+    MatButtonModule,  
+    MatCardModule,  
+    MatProgressBarModule
   ],
   providers: [
     AuthGuard,

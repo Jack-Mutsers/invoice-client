@@ -5,6 +5,7 @@ import { Invoice } from '../_models';
 
 @Injectable({ providedIn: 'root' })
 export class InvoiceService {
+	SERVER_URL: string = "http://localhost:9090/Invoice/";
     constructor(private http: HttpClient) { }
     
     getIncommingInvoices(contactCode: string){
@@ -35,7 +36,10 @@ export class InvoiceService {
     }
 
     uploadFile(formData: FormData){
-        
+        return this.http.post<any>(this.SERVER_URL, formData, {  
+            reportProgress: true,  
+            observe: 'events'  
+          }); 
     }
 
     addInvoice(invoice: Invoice) {

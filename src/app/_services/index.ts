@@ -7,4 +7,4 @@ export * from './user.service';
 export * from './authentication.service';
 export * from './message.service';
 export * from './company.service';
-export * from './invoice.service';
+export * from './upload.service';

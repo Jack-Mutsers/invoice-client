@@ -4,7 +4,8 @@ export interface ICustomer{
     address: string;
     zipcode: string;
     city: string;
-    companyId: number
+    companyId: number;
+    contactCode: string;
 }
 
 export class Customer implements ICustomer{
@@ -14,4 +15,5 @@ export class Customer implements ICustomer{
     zipcode = null;
     city = null;
     companyId = 0;
+    contactCode = null;
 }
