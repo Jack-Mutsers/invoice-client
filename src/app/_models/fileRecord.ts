@@ -4,7 +4,7 @@ export interface IFileRecord{
     url: string;
     fileType: string;
     creationDate: string;
-    contactCode: String;
+    customerId: number;
     ownerId: number;
 }
 
@@ -14,7 +14,7 @@ export class FileRecord implements IFileRecord{
     url = null;
     fileType = null;
     creationDate = null;
-    contactCode = "";
+    customerId = 0;
     ownerId = 0;
  
     // load from api response
@@ -24,13 +24,13 @@ export class FileRecord implements IFileRecord{
         this.url = object.url;
         this.fileType = object.fileType;
         this.creationDate = object.creationDate;
-        this.contactCode = object.contactCode;
+        this.customerId = object.customerId;
         this.ownerId = object.ownerId;
     }
 
     // load with html form data
     public loadFromForm(object){ 
         this.name = object.name;
-        this.contactCode = object.contactCode;
+        this.customerId = object.customerId;
     }
 }

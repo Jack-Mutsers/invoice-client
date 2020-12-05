@@ -44,13 +44,13 @@
                         <label for="name">Customer</label>
                     </div>
                     <div class="col-md-4">
-                        <select formControlName="contactCode" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.contactCode.errors }" [(ngModel)]="formFileRecord.contactCode">
+                        <select formControlName="customerId" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.customerId.errors }" [(ngModel)]="formFileRecord.customerId">
                             <option value="">-- select custormer --</option>
-                            <option *ngFor="let customer of customers" value="{{customer.contactCode}}">{{customer.name}}</option>
+                            <option *ngFor="let customer of customers" value="{{customer.id}}">{{customer.name}}</option>
                         </select>
 
-                        <div *ngIf="submitted && f.contactCode.errors" class="invalid-feedback">
-                            <div *ngIf="f.contactCode.errors.required">Customer selection is required</div>
+                        <div *ngIf="submitted && f.customerId.errors" class="invalid-feedback">
+                            <div *ngIf="f.customerId.errors.required">Customer selection is required</div>
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,13 @@
 <hr>
 
 <h3>product list</h3>
+<br>
 <div class="row">
+    <div class="col-md-12">
+        <h4>
+            Files send by me
+        </h4>
+    </div>
     <div class="col-md-12">
         <table class="table table-striped">
             <thead>
@@ -84,6 +90,38 @@
             </thead>
             <tbody>
                 <tr *ngFor="let fileRecord of MyfileRecords">
+                    <td>{{fileRecord.name}}</td>
+                    <td>{{fileRecord.fileType}}</td>
+                    <td>{{fileRecord.creationDate}}</td>
+                    <td><a class="btn icon-container" type="button" (click)="onDownload(fileRecord.url, fileRecord.name)"><fa-icon class="trash-icon" [icon]="downloadIcon"></fa-icon></a></td>
+                    <td><a class="btn icon-container" type="button" data-toggle="modal" data-target="#delete_modal" data-ng-click="Clear()" (click)="onSetDeleteData(product.id)"><fa-icon class="trash-icon" [icon]="trashIcon"></fa-icon></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>
+            Files for me
+        </h4>
+    </div>
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>File Type</th>
+                    <th>Creation Date</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let fileRecord of fileRecordsForMe">
                     <td>{{fileRecord.name}}</td>
                     <td>{{fileRecord.fileType}}</td>
                     <td>{{fileRecord.creationDate}}</td>

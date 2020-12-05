@@ -3,7 +3,7 @@ import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { from, of } from 'rxjs';  
 import { catchError, map } from 'rxjs/operators';  
-import { UploadService } from  '../../_services';
+import { CustomerService, UploadService } from  '../../_services';
 import { FileRecord, Customer } from '../../_models';
 import { faTrash, faFileDownload } from '@fortawesome/free-solid-svg-icons';
 import * as $ from 'jquery';
@@ -27,6 +27,7 @@ export class InvoicesComponent implements OnInit {
 
   @ViewChild("fileUpload", {static: false}) fileUpload: ElementRef;files  = [];  
   constructor(
+    private customerApiService: CustomerService,
     private uploadService: UploadService,
     private formBuilder: FormBuilder
   ) { }
@@ -37,7 +38,7 @@ export class InvoicesComponent implements OnInit {
     this.loadFilesForMe();
 
     this.fileRecordForm = this.formBuilder.group({
-      contactCode: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
+      customerId: ['', [Validators.required]]
     });
   }
 
@@ -45,32 +46,9 @@ export class InvoicesComponent implements OnInit {
   get f() { return this.fileRecordForm.controls; }
 
   loadCustomers(){
-    // this.customerApiService.getProducts().subscribe((data)=>{
-    //   this.customers = <Customer[]> data;
-    // });
-
-    var data = [
-      {
-        id: 1,
-        name: "henk",
-        address: null,
-        zipcode: null,
-        city: null,
-        companyId: 0,
-        contactCode: "as1dDSF25f"
-      },
-      {
-        id: 2,
-        name: "karel",
-        address: null,
-        zipcode: null,
-        city: null,
-        companyId: 0,
-        contactCode: "25DC2cvE2C"
-      },
-    ];
-
-    this.customers = <Customer[]> data;
+    this.customerApiService.getCustomers().subscribe((data)=>{
+      this.customers = <Customer[]> data;
+    });
   }
 
   loadMyFiles(){
@@ -85,10 +63,10 @@ export class InvoicesComponent implements OnInit {
     });
   }
 
-  uploadFile(file, contactCode) {  
+  uploadFile(file, customerId) {  
     const formData = new FormData();  
     formData.append('file', file.data); 
-    formData.append('contactCode', contactCode); 
+    formData.append('customerId', customerId); 
     
     
     file.inProgress = true;  
@@ -114,12 +92,12 @@ export class InvoicesComponent implements OnInit {
       });  
   }
 
-  private uploadFiles(contactCode: string) {  
+  private uploadFiles(customerId: number) {  
     this.fileUpload.nativeElement.value = '';  
     this.files.forEach(file => {  
       if(file.progress == 0){
         console.log(file);
-        this.uploadFile(file, contactCode);  
+        this.uploadFile(file, customerId);  
       }
     });  
   }
@@ -157,7 +135,6 @@ export class InvoicesComponent implements OnInit {
         const file = fileUpload.files[index];  
         this.files.push({ data: file, inProgress: false, progress: 0, filename: file.name});  
       }  
-      // this.uploadFiles();  
     };  
 
     fileUpload.click();  
@@ -173,8 +150,8 @@ export class InvoicesComponent implements OnInit {
     
     this.loading = true;
 
-    var contactCode = this.fileRecordForm.value.contactCode;
-    this.uploadFiles(contactCode);  
+    var customerId = this.fileRecordForm.value.customerId;
+    this.uploadFiles(customerId);  
 
     this.loading = false;
   }
