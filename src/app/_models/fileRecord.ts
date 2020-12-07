@@ -1,3 +1,6 @@
+import { Company } from './company';
+import { Customer } from './customer';
+
 export interface IFileRecord{
     id: number;
     name: string;
@@ -5,7 +8,9 @@ export interface IFileRecord{
     fileType: string;
     creationDate: string;
     customerId: number;
+    customer: Customer;
     ownerId: number;
+    owner: Company;
 }
 
 export class FileRecord implements IFileRecord{
@@ -15,7 +20,9 @@ export class FileRecord implements IFileRecord{
     fileType = null;
     creationDate = null;
     customerId = 0;
+    customer = new Customer();
     ownerId = 0;
+    owner = new Company();
  
     // load from api response
     public loadFromObject(object){
@@ -25,7 +32,9 @@ export class FileRecord implements IFileRecord{
         this.fileType = object.fileType;
         this.creationDate = object.creationDate;
         this.customerId = object.customerId;
+        this.customer = object.customer;
         this.ownerId = object.ownerId;
+        this.owner = object.owner;
     }
 
     // load with html form data

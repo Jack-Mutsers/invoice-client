@@ -3,7 +3,7 @@ import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { from, of } from 'rxjs';  
 import { catchError, map } from 'rxjs/operators';  
-import { CustomerService, UploadService } from  '../../_services';
+import { AlertService, CustomerService, UploadService } from  '../../_services';
 import { FileRecord, Customer } from '../../_models';
 import { faTrash, faFileDownload } from '@fortawesome/free-solid-svg-icons';
 import * as $ from 'jquery';
@@ -20,6 +20,7 @@ export class InvoicesComponent implements OnInit {
   MyfileRecords: FileRecord[];
   fileRecordsForMe: FileRecord[];
   customers: Customer[];
+  deleteFile: FileRecord = new FileRecord();
   loading = false;
   submitted = false;
   trashIcon = faTrash;
@@ -29,7 +30,8 @@ export class InvoicesComponent implements OnInit {
   constructor(
     private customerApiService: CustomerService,
     private uploadService: UploadService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -84,10 +86,9 @@ export class InvoicesComponent implements OnInit {
         file.inProgress = false;  
         return of(`${file.data.name} upload failed.`);  
       })).subscribe((event: any) => {  
-        // console.log(event);
         file.inProgress = false;  
         if (typeof (event) === 'object') {  
-          // console.log(event.body);  
+          this.loadMyFiles();
         }  
       });  
   }
@@ -96,7 +97,6 @@ export class InvoicesComponent implements OnInit {
     this.fileUpload.nativeElement.value = '';  
     this.files.forEach(file => {  
       if(file.progress == 0){
-        console.log(file);
         this.uploadFile(file, customerId);  
       }
     });  
@@ -154,5 +154,23 @@ export class InvoicesComponent implements OnInit {
     this.uploadFiles(customerId);  
 
     this.loading = false;
+  }
+
+  onDelete(id){
+    this.uploadService.delete(id).subscribe(
+      data => {
+        console.log(data.message);
+        this.alertService.success(data.message, true);
+        this.loadMyFiles();
+      },
+      error => {
+        console.log(error);
+        this.alertService.error(error);
+      }
+    );
+  }
+
+  onSetDeleteData(id){
+    this.deleteFile = this.MyfileRecords.filter(x => x.id === id)[0];
   }
 }

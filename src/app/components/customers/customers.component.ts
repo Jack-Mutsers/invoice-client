@@ -122,7 +122,7 @@ export class CustomersComponent implements OnInit {
   }
 
   onSetDeleteData(id){
-    this. deleteCustomer = this.customers.filter(x => x.id === id)[0];
+    this.deleteCustomer = this.customers.filter(x => x.id === id)[0];
   }
 
   private loadCustomers(){

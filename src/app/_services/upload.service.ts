@@ -40,4 +40,8 @@ export class UploadService {
         }
     })); 
   }
+
+  delete(id: number) {
+    return this.http.delete<any>(this.SERVER_URL + id);
+  }
 }

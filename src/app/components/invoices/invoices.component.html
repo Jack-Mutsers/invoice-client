@@ -71,70 +71,97 @@
 
 <h3>product list</h3>
 <br>
-<div class="row">
-    <div class="col-md-12">
-        <h4>
-            Files send by me
-        </h4>
-    </div>
-    <div class="col-md-12">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>File Type</th>
-                    <th>Creation Date</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let fileRecord of MyfileRecords">
-                    <td>{{fileRecord.name}}</td>
-                    <td>{{fileRecord.fileType}}</td>
-                    <td>{{fileRecord.creationDate}}</td>
-                    <td><a class="btn icon-container" type="button" (click)="onDownload(fileRecord.url, fileRecord.name)"><fa-icon class="trash-icon" [icon]="downloadIcon"></fa-icon></a></td>
-                    <td><a class="btn icon-container" type="button" data-toggle="modal" data-target="#delete_modal" data-ng-click="Clear()" (click)="onSetDeleteData(product.id)"><fa-icon class="trash-icon" [icon]="trashIcon"></fa-icon></a></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="MyFiles-tab" data-toggle="tab" href="#MyFiles" role="tab" aria-controls="home" aria-selected="true">Files I send</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="FilesForMe-tab" data-toggle="tab" href="#FilesForMe" role="tab" aria-controls="profile" aria-selected="false">Files for me</a>
+    </li>
+</ul>
 <br>
-
-<div class="row">
-    <div class="col-md-12">
-        <h4>
-            Files for me
-        </h4>
+<div class="tab-content row">
+    <div class="tab-pane fade show active" id="MyFiles" role="tabpanel" aria-labelledby="MyFiles-tab">
+        <div class="col-md-12">
+            <h4>
+                Files send by me
+            </h4>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>File Type</th>
+                        <th>Creation Date</th>
+                        <th>Customer</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let fileRecord of MyfileRecords">
+                        <td>{{fileRecord.name}}</td>
+                        <td>{{fileRecord.fileType}}</td>
+                        <td>{{fileRecord.creationDate}}</td>
+                        <td>{{fileRecord.customer.name}}</td>
+                        <td><a class="btn icon-container" type="button" (click)="onDownload(fileRecord.url, fileRecord.name)"><fa-icon class="trash-icon" [icon]="downloadIcon"></fa-icon></a></td>
+                        <td><a class="btn icon-container" type="button" data-toggle="modal" data-target="#delete_modal" data-ng-click="Clear()" (click)="onSetDeleteData(fileRecord.id)"><fa-icon class="trash-icon" [icon]="trashIcon"></fa-icon></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="col-md-12">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>File Type</th>
-                    <th>Creation Date</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let fileRecord of fileRecordsForMe">
-                    <td>{{fileRecord.name}}</td>
-                    <td>{{fileRecord.fileType}}</td>
-                    <td>{{fileRecord.creationDate}}</td>
-                    <td><a class="btn icon-container" type="button" (click)="onDownload(fileRecord.url, fileRecord.name)"><fa-icon class="trash-icon" [icon]="downloadIcon"></fa-icon></a></td>
-                    <td><a class="btn icon-container" type="button" data-toggle="modal" data-target="#delete_modal" data-ng-click="Clear()" (click)="onSetDeleteData(product.id)"><fa-icon class="trash-icon" [icon]="trashIcon"></fa-icon></a></td>
-                </tr>
-            </tbody>
-        </table>
+    
+    <div class="tab-pane fade" id="FilesForMe" role="tabpanel" aria-labelledby="FilesForMe-tab">
+        <div class="col-md-12">
+            <h4>
+                Files for me
+            </h4>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>File Type</th>
+                        <th>Creation Date</th>
+                        <th>company</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let fileRecord of fileRecordsForMe">
+                        <td>{{fileRecord.name}}</td>
+                        <td>{{fileRecord.fileType}}</td>
+                        <td>{{fileRecord.creationDate}}</td>
+                        <td>{{fileRecord.owner.name}}</td>
+                        <td><a class="btn icon-container" type="button" (click)="onDownload(fileRecord.url, fileRecord.name)"><fa-icon class="trash-icon" [icon]="downloadIcon"></fa-icon></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
+<!-- Delete Modal -->
 
-
+<div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> Delete File: <strong>{{ deleteFile.name }}</strong> </h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this File?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" (click)="onDelete(deleteFile.id);" data-dismiss="modal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
