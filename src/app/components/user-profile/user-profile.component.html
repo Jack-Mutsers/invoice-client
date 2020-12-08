@@ -1,1 +1,137 @@
-<p>user-profile works!</p>
+<div class="container">
+    <h2>My profile</h2>
+    <br>
+    <h4>Update user information</h4>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <form [formGroup]="userForm" (ngSubmit)="onSubmitUser()">
+                <input type="hidden" formControlName="id" class="form-control" [ngClass]="{ 'is-invalid': submitted && uf.name.errors }"  [(ngModel)]="formUser.id">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="name">Name*</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && uf.name.errors }" [(ngModel)]="formUser.name" />
+                            <div *ngIf="submitted && uf.name.errors" class="invalid-feedback">
+                                <div *ngIf="uf.name.errors.required">Name is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="address">address*</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && uf.address.errors }" [(ngModel)]="formUser.address" />
+                            <div *ngIf="submitted && uf.address.errors" class="invalid-feedback">
+                                <div *ngIf="uf.address.errors.required">Address is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="zipcode">zipcode*</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" formControlName="zipcode" class="form-control" [ngClass]="{ 'is-invalid': submitted && uf.zipcode.errors }" [(ngModel)]="formUser.zipcode" />
+                            <div *ngIf="submitted && uf.zipcode.errors" class="invalid-feedback">
+                                <div *ngIf="uf.zipcode.errors.required">Zipcode is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="city">city*</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': submitted && uf.city.errors }" [(ngModel)]="formUser.city" />
+                            <div *ngIf="submitted && uf.city.errors" class="invalid-feedback">
+                                <div *ngIf="uf.city.errors.required">City is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-primary">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Update
+                    </button>
+                    <!-- <a routerLink="/customers" class="btn btn-link">Cancel</a> -->
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+    
+    <h4>Update password</h4>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <form [formGroup]="userAccountForm" (ngSubmit)="onSubmitPasswordUpdate()">
+                <input type="hidden" formControlName="id" class="form-control" [(ngModel)]="formUserAccount.id">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="city">Password</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="password" (keyup)="onChangeConfirmPassword()" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && uaf.password.errors }" [(ngModel)]="formUserAccount.password" />
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Password strength:
+                                </div>
+                                <div class="col-md-7">
+                                    <password-strength-meter [password]="formUserAccount.password"></password-strength-meter>
+                                </div>
+                            </div>
+                            <div *ngIf="submitted && uf.city.errors" class="invalid-feedback">
+                                <div *ngIf="uaf.city.errors.required">Password is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="city">Confirm Password</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="password" (keyup)="onChangeConfirmPassword()" class="form-control" formControlName="password" [(ngModel)]="confirmPassword"/>
+
+                            <div *ngIf="!passwordsMatch" style="color: red;">
+                                "Passwords do not match"
+                            </div>
+
+                            <div *ngIf="passwordsMatch" style="color: green;">
+                                Passwords match
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-primary">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Update
+                    </button>
+                    <!-- <a routerLink="/customers" class="btn btn-link">Cancel</a> -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

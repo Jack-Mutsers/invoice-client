@@ -12,4 +12,13 @@ export class User implements IUser{
     address = null;
     zipcode = null;
     city = null;
+
+    // load from api response
+    public loadFromObject(object){
+        this.id = object.id;
+        this.name = object.name;
+        this.address = object.address;
+        this.zipcode = object.zipcode;
+        this.city = object.city;
+    }
 }

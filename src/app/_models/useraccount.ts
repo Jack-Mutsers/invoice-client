@@ -15,7 +15,7 @@ export interface IUseraccount{
 export class UserAccount implements IUseraccount{
     id = 0;
     username = null;
-    password = null;
+    password = "";
     contactCode = null;
     user = new User();
     companyId = 0;

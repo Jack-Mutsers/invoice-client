@@ -36,6 +36,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UserInvoicesComponent } from './components/user-invoices/user-invoices.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { CompanyProfileComponent } from './components/company-profile/company-profile.component';
+import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,9 @@ import { CompanyProfileComponent } from './components/company-profile/company-pr
     MatIconModule,  
     MatButtonModule,  
     MatCardModule,  
-    MatProgressBarModule
+    MatProgressBarModule,
+    PasswordStrengthMeterModule,
+    FormsModule
   ],
   providers: [
     AuthGuard,
