@@ -34,6 +34,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule  } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UserInvoicesComponent } from './components/user-invoices/user-invoices.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { CompanyProfileComponent } from './components/company-profile/company-profile.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import { UserInvoicesComponent } from './components/user-invoices/user-invoices.
     CompanyregistrationComponent,
     InvoicesComponent,
     UserInvoicesComponent,
+    UserProfileComponent,
+    CompanyProfileComponent,
   ],
   imports: [
     BrowserModule,

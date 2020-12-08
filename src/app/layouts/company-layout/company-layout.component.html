@@ -8,17 +8,53 @@
       />
       <span>Welcome</span>
   </div>
-  <div class="navigation col-md-10 col-sm-9 col-xs-2">
+  <div class="navigation col-md-10 col-sm-9 col-xs-2" id="regular_menu">
       <a href="/company/" class="btn btn-light">Home</a>
       <a href="/company/customers" class="btn btn-light">Customers</a>
       <a href="/company/products" class="btn btn-light">Products</a>
       <a href="/company/productcategories" class="btn btn-light">Product categories</a>
       <a href="/company/invoices" class="btn btn-light">Invoices</a>
-      <a href="/login" class="btn btn-light">Logout</a>
+      
+      <div class="dropdown profile_bar">
+        <a href="/profile" class="dropbtn btn btn-light"><fa-icon [icon]="userIcon"></fa-icon> {{username}}</a>
+        <div class="dropdown-content">
+          <a href="/company/profile" class="btn btn-light">Profile</a>
+          <a href="/company/company" class="btn btn-light">company</a>
+          <a href="/login" class="btn btn-light">Logout</a>
+        </div>
+      </div>
   </div>
+
+
+  <div class="navigation col-md-10 col-sm-9 col-xs-2" id="hamburger_menu">
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+      <a href="/company/">Home</a>
+      <a href="/company/customers">Customers</a>
+      <a href="/company/products">Products</a>
+      <a href="/company/productcategories">Product categories</a>
+      <a href="/company/invoices">Invoices</a>
+      
+      <div class="dropdown">
+        <a href="/profile" class="dropbtn"><fa-icon [icon]="userIcon"></fa-icon> {{username}}</a>
+        <div class="dropdown-content">
+          <a href="/company/profile">Profile</a>
+          <a href="/company/company">company</a>
+          <a href="/login">Logout</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile_bar">
+      <!-- Use any element to open the sidenav -->
+      <span (click)="openNav()">&#9776;</span>
+    </div>
+</div>
+
+
 </div>
 <div class="container">
   <router-outlet>
   </router-outlet>
 </div>
-  
+ 
