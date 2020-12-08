@@ -40,7 +40,7 @@ export class InvoicesComponent implements OnInit {
     this.loadFilesForMe();
 
     this.fileRecordForm = this.formBuilder.group({
-      customerId: ['', [Validators.required]]
+      customerId: ['', [Validators.required, Validators.min(1)]]
     });
   }
 

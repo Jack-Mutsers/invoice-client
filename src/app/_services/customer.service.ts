@@ -26,7 +26,6 @@ export class CustomerService {
     }
 
     addCustomer(customer: Customer) {
-        console.log(customer);
         return this.http.post<any>(`http://localhost:9090/customers`, customer);
     }
 

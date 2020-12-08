@@ -1,0 +1,38 @@
+
+
+<h2>Invocies</h2>
+<br>
+    
+<div class="row">
+    <div class="col-md-12">
+        <h4>
+            Files for me
+        </h4>
+    </div>
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>File Type</th>
+                    <th>Creation Date</th>
+                    <th>company</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let fileRecord of fileRecordsForMe">
+                    <td>{{fileRecord.name}}</td>
+                    <td>{{fileRecord.fileType}}</td>
+                    <td>{{fileRecord.creationDate}}</td>
+                    <td>{{fileRecord.owner.name}}</td>
+                    <td><a class="btn icon-container" type="button" (click)="onDownload(fileRecord.url, fileRecord.name)"><fa-icon class="trash-icon" [icon]="downloadIcon"></fa-icon></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+

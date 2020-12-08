@@ -8,13 +8,7 @@ export class UserAccountService {
     constructor(private http: HttpClient) { }
         
     addUserAccount(useraccount: UserAccount) {
-        console.log(JSON.stringify(useraccount));
-        return this.http.post<any>(`http://localhost:9090/useraccount`, useraccount)
-        .pipe(map(response => {
-            if(response.status){
-                return response.body;
-            }
-        }));
+        return this.http.post<any>(`http://localhost:9090/useraccount`, useraccount);
     }
 
     update(id: number, useraccount: UserAccount) {

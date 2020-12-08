@@ -13,6 +13,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { CompanyregistrationComponent } from './components/companyregistration/companyregistration.component';
 import { Role } from './_models';
 import { InvoicesComponent } from './components/invoices/invoices.component';
+import { UserInvoicesComponent } from './components/user-invoices/user-invoices.component';
 
 const routes: Routes = [
   {path:'company', component: CompanyLayoutComponent, canActivate: [AuthGuard], data: { roles: [Role.Owner, Role.Employee] }, children: [
@@ -24,7 +25,7 @@ const routes: Routes = [
   ]},
   {path:'', component: HomeLayoutComponent, canActivate: [AuthGuard], data: { roles: [Role.User] }, children: [
     {path:'register-company', component: CompanyregistrationComponent},
-    {path:'invoices', component: InvoicesComponent},
+    {path:'invoices', component: UserInvoicesComponent},
     {path:'', component: HomeComponent}
   ]},
   {path:'', component: LoginLayoutComponent, children: [

@@ -49,17 +49,17 @@ export class RegisterComponent implements OnInit {
 
       this.loading = true;
       this.service.addUserAccount(useraccount)
-          .pipe(first())
-          .subscribe(
-              data => {
-                window.location.reload(true);
-                this.router.navigate(['/login']);
-              },
-              error => {
-                console.log(error);
-                this.alertService.error(error);
-                this.loading = false;
-              });
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.router.navigate(["/"]);
+          },
+          error => {
+            console.log(error);
+            this.alertService.error(error);
+            this.loading = false;
+          }
+        );
   }
 
 }
