@@ -14,7 +14,8 @@ export class UserProfileComponent implements OnInit {
   userAccountForm: FormGroup;
   formUser: User = new User();
   formUserAccount: UserAccount = new UserAccount();
-  confirmPassword: String = "";
+  confirmPassword: string = "";
+  deletePassword: string = "";
   passwordsMatch: boolean = true;
   loading = false;
   submitted = false;
@@ -50,18 +51,65 @@ export class UserProfileComponent implements OnInit {
   get uaf() { return this.userAccountForm.controls; }
 
   onSubmitUser(){
+    // stop here if form is invalid
+    if (this.userForm.invalid) {
+      return;
+    }
 
+    this.formUserAccount.user = this.formUser;
+    
+    this.sendUpdate();
   }
 
   onSubmitPasswordUpdate(){
-    if(!this.passwordsMatch){return;}
+    if(this.userAccountForm.invalid || !this.passwordsMatch){
+      return;
+    }
 
+    this.sendUpdate();
+  }
 
-    console.log("valid");
+  sendUpdate(){
+    this.submitted = true;
+
+    this.apiService.update(this.formUserAccount.id, this.formUserAccount).subscribe(
+      data => {
+        localStorage.setItem('currentUser', JSON.stringify(data));
+        this.loading = false;
+        this.submitted = false;
+        this.formUserAccount.password = "";
+        this.confirmPassword = "";
+      },
+      error => {
+        console.log(error);
+        this.alertService.error(error);
+        this.loading = false;
+      }
+    );
   }
 
   onChangeConfirmPassword(){
     this.passwordsMatch = this.confirmPassword == this.formUserAccount.password;
+  }
+
+  onDelete(){
+    if(this.deletePassword != null && this.deletePassword.trim() != ""){
+      this.apiService.delete(this.formUserAccount.id, this.deletePassword).subscribe(
+        data => {
+          console.log(data);
+          this.alertService.success(data);
+          this.router.navigate(["/login"]);
+        },
+        error => {
+          console.log(error);
+          this.alertService.error(error);
+        }
+      );
+    }
+  }
+
+  onChangeDeletePassword(e){
+    this.deletePassword = e.target.value;
   }
 
   LoadUser(){

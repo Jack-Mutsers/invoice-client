@@ -20,11 +20,11 @@ export class UserAccountService {
         }));
     }
 
-    delete(id: number) {
-        return this.http.delete<any>(`http://localhost:9090/useraccount/${id}`)
+    delete(id: number, password: string) {
+        return this.http.request<any>('delete', `http://localhost:9090/useraccount/${id}`, {body: {password}})
         .pipe(map(response => {
             if(response.status){
-                return response.body;
+                return response.message;
             }
         }));
     }

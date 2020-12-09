@@ -73,6 +73,7 @@
             </form>
         </div>
     </div>
+
     <br>
     <hr>
     <br>
@@ -132,6 +133,49 @@
                     <!-- <a routerLink="/customers" class="btn btn-link">Cancel</a> -->
                 </div>
             </form>
+        </div>
+    </div>
+
+    <br>
+    <hr>
+    <br>
+    
+    <h4>Delete account</h4>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+
+            <a class="btn btn-danger icon-container" type="button" data-toggle="modal" data-target="#delete_modal" data-ng-click="Clear()">Delete</a>
+
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Delete Modal -->
+
+<div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> Delete account </h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete your account?</p>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="city">Enter Password</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="password" class="form-control" (keyup)="onChangeDeletePassword($event)"/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" (click)="onDelete();" data-dismiss="modal">Delete</button>
+            </div>
         </div>
     </div>
 </div>
