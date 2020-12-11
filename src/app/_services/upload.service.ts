@@ -16,9 +16,9 @@ export class UploadService {
       });  
   }
 
-  public getDownload(url: string){
+  public getDownload(id: number){
     // return this.http.get<any>(url);
-    return this.http.get(`${url}`,{
+    return this.http.get(this.SERVER_URL + `files/${id}`,{
       responseType: 'arraybuffer'
     });
   }

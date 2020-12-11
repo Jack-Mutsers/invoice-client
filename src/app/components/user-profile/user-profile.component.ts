@@ -18,7 +18,8 @@ export class UserProfileComponent implements OnInit {
   deletePassword: string = "";
   passwordsMatch: boolean = true;
   loading = false;
-  submitted = false;
+  submittedUser = false;
+  submittedPassword = false;
 
   constructor(
     private apiService: UserAccountService,
@@ -44,13 +45,13 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  
-
   // convenience getter for easy access to form fields
   get uf() { return this.userForm.controls; }
   get uaf() { return this.userAccountForm.controls; }
 
   onSubmitUser(){
+    this.submittedUser = true;
+
     // stop here if form is invalid
     if (this.userForm.invalid) {
       return;
@@ -62,6 +63,8 @@ export class UserProfileComponent implements OnInit {
   }
 
   onSubmitPasswordUpdate(){
+    this.submittedPassword = true;
+    
     if(this.userAccountForm.invalid || !this.passwordsMatch){
       return;
     }
@@ -70,13 +73,14 @@ export class UserProfileComponent implements OnInit {
   }
 
   sendUpdate(){
-    this.submitted = true;
+    this.loading = true;
 
     this.apiService.update(this.formUserAccount.id, this.formUserAccount).subscribe(
       data => {
         localStorage.setItem('currentUser', JSON.stringify(data));
         this.loading = false;
-        this.submitted = false;
+        this.submittedUser = false;
+        this.submittedPassword = false;
         this.formUserAccount.password = "";
         this.confirmPassword = "";
       },

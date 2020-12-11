@@ -1,1 +1,139 @@
-<p>company-profile works!</p>
+<div class="container">
+    <h2>{{companyName}}</h2>
+    <br>
+    <h4>Update company information</h4>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
+                <input type="hidden" formControlName="id" class="form-control" [(ngModel)]="formCompany.id">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="name">Name*</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" [(ngModel)]="formCompany.name" />
+                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required">Name is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="address">Address*</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" [(ngModel)]="formCompany.address" />
+                            <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                                <div *ngIf="f.address.errors.required">Address is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="zipcode">Zipcode*</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" formControlName="zipcode" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.zipcode.errors }" [(ngModel)]="formCompany.zipcode" />
+                            <div *ngIf="submitted && f.zipcode.errors" class="invalid-feedback">
+                                <div *ngIf="f.zipcode.errors.required">Zipcode is required</div>
+                                <div *ngIf="f.zipcode.errors.pattern">Please provide a valid dutch zipcode</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="city">City*</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" [(ngModel)]="formCompany.city" />
+                            <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                                <div *ngIf="f.city.errors.required">City is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="city">Telephone number*</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" formControlName="telephoneNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.telephoneNumber.errors }" [(ngModel)]="formCompany.telephoneNumber" />
+                            <div *ngIf="submitted && f.telephoneNumber.errors" class="invalid-feedback">
+                                <div *ngIf="f.telephoneNumber.errors.required">Telephone number is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-primary">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Update
+                    </button>
+                    <!-- <a routerLink="/customers" class="btn btn-link">Cancel</a> -->
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <br>
+    <hr>
+    <br>
+    
+    <h4>employees</h4>
+
+    <div class="row">
+        <div class="col-md-12">
+            
+        </div>
+    </div>
+
+    <div *ngIf="owner">
+        <br>
+        <hr>
+        <br>
+        
+        <h4>Delete company</h4>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+
+                <a class="btn btn-danger icon-container" type="button" data-toggle="modal" data-target="#delete_modal" data-ng-click="Clear()">Delete</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Delete Modal -->
+
+<div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> Delete Company </h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete your Company?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" (click)="onDelete();" data-dismiss="modal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

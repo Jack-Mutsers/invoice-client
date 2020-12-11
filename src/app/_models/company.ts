@@ -20,8 +20,8 @@ export class Company implements ICompany{
     ownerId = 0;
  
     // load from api response
-    public loadFromObject(object){
-        this.id = object.id;
+    public loadFromObject(object, id){
+        this.id = id;
         this.name = object.name;
         this.address = object.address;
         this.zipcode = object.zipcode;

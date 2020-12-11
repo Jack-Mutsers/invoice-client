@@ -102,10 +102,9 @@ export class InvoicesComponent implements OnInit {
     });  
   }
 
-  onDownload(url: string, rawFilename: string){
-    this.uploadService.getDownload(url)
+  onDownload(id: number, filename: string){
+    this.uploadService.getDownload(id)
       .subscribe(response => {
-        let filename = rawFilename.split("-")[0];
         let blob = new Blob([response], { type: "application/pdf"});
         let createdURL = window.URL.createObjectURL(blob);
 

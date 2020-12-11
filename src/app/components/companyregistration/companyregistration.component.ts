@@ -52,14 +52,11 @@ export class CompanyregistrationComponent implements OnInit {
       console.log(userAccount);
 
       this.loading = true;
-      this.service.addCompany(company, userAccount.userId)
+      this.service.addCompany(company)
         .pipe(first())
         .subscribe(
           data => {
-            userAccount.role = Role.Owner;
-            userAccount.companyId = data.id;
-            localStorage.setItem('currentUser', JSON.stringify(userAccount));
-            this.router.navigate(["/company/"]);
+            this.router.navigate(["/login"]);
           },
           error => {
             console.log(error);

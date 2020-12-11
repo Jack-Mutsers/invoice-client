@@ -101,7 +101,7 @@
                             <td>{{fileRecord.fileType}}</td>
                             <td>{{fileRecord.creationDate}}</td>
                             <td>{{fileRecord.customer.name}}</td>
-                            <td><a class="btn icon-container" type="button" (click)="onDownload(fileRecord.url, fileRecord.name)"><fa-icon class="trash-icon" [icon]="downloadIcon"></fa-icon></a></td>
+                            <td><a class="btn icon-container" type="button" (click)="onDownload(fileRecord.id, fileRecord.name)"><fa-icon class="trash-icon" [icon]="downloadIcon"></fa-icon></a></td>
                             <td><a class="btn icon-container" type="button" data-toggle="modal" data-target="#delete_modal" data-ng-click="Clear()" (click)="onSetDeleteData(fileRecord.id)"><fa-icon class="trash-icon" [icon]="trashIcon"></fa-icon></a></td>
                         </tr>
                     </tbody>
@@ -132,7 +132,7 @@
                             <td>{{fileRecord.fileType}}</td>
                             <td>{{fileRecord.creationDate}}</td>
                             <td>{{fileRecord.owner.name}}</td>
-                            <td><a class="btn icon-container" type="button" (click)="onDownload(fileRecord.url, fileRecord.name)"><fa-icon class="trash-icon" [icon]="downloadIcon"></fa-icon></a></td>
+                            <td><a class="btn icon-container" type="button" (click)="onDownload(fileRecord.id, fileRecord.name)"><fa-icon class="trash-icon" [icon]="downloadIcon"></fa-icon></a></td>
                         </tr>
                     </tbody>
                 </table>

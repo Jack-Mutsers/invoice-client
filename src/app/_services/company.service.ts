@@ -8,7 +8,7 @@ export class CompanyService {
     constructor(private http: HttpClient) { }
     
     getCompanys(){
-        return this.http.get<any>(`http://localhost:9090/company`)
+        return this.http.get<any>(`http://localhost:9090/company/all`)
         .pipe(map(response => {
             if(response.status){
                 return response.body;
@@ -16,8 +16,8 @@ export class CompanyService {
         }));
     }
     
-    getCompany(companyId: number, userId: number){
-        return this.http.get<any>(`http://localhost:9090/company/${companyId}/${userId}`)
+    getCompany(){
+        return this.http.get<any>(`http://localhost:9090/company`)
         .pipe(map(response => {
             if(response.status){
                 return response.body;
@@ -25,8 +25,8 @@ export class CompanyService {
         }));
     }
 
-    addCompany(company: Company, userId: number) {
-        return this.http.post<any>(`http://localhost:9090/company/${userId}`, company)
+    getEmployees(){
+        return this.http.get<any>(`http://localhost:9090/company/employees`)
         .pipe(map(response => {
             if(response.status){
                 return response.body;
@@ -34,11 +34,20 @@ export class CompanyService {
         }));
     }
 
-    update(company: Company, userId: number) {
-        return this.http.put<any>(`http://localhost:9090/company/${userId}`, company);
+    addCompany(company: Company) {
+        return this.http.post<any>(`http://localhost:9090/company`, company)
+        .pipe(map(response => {
+            if(response.status){
+                return response.body;
+            }
+        }));
     }
 
-    delete(companyId: number, userId: number) {
-        return this.http.delete<any>(`http://localhost:9090/company/${companyId}/${userId}`);
+    update(company: Company) {
+        return this.http.put<any>(`http://localhost:9090/company`, company);
+    }
+
+    delete() {
+        return this.http.delete<any>(`http://localhost:9090/company`);
     }
 }
