@@ -409,7 +409,7 @@ svg#clouds {
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-width: 894px) {
+@media screen and (max-width: 991px) {
     #regular_menu{display: none;}
     #hamburger_menu{display: block;}
 }

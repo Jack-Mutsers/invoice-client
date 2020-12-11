@@ -13,6 +13,9 @@ import { UserAccount } from '../../_models';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
+  formUserAccount: UserAccount = new UserAccount();
+  confirmPassword: string = "";
+  passwordsMatch: boolean = true;
   loading = false;
   submitted = false;
 
@@ -40,15 +43,12 @@ export class RegisterComponent implements OnInit {
       this.submitted = true;
 
       // stop here if form is invalid
-      if (this.registerForm.invalid) {
+      if (this.registerForm.invalid || !this.passwordsMatch) {
           return;
       }
 
-      var useraccount = new UserAccount();
-      useraccount.loadFromForm(this.registerForm.value);
-
       this.loading = true;
-      this.service.addUserAccount(useraccount)
+      this.service.addUserAccount(this.formUserAccount)
         .pipe(first())
         .subscribe(
           data => {
@@ -60,6 +60,11 @@ export class RegisterComponent implements OnInit {
             this.loading = false;
           }
         );
+  }
+
+
+  onChangeConfirmPassword(){
+    this.passwordsMatch = this.confirmPassword == this.formUserAccount.password;
   }
 
 }
