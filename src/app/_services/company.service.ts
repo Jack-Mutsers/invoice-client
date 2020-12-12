@@ -43,11 +43,24 @@ export class CompanyService {
         }));
     }
 
+    sendEmploymentRequest(contactCode: string) {
+        return this.http.post<any>(`http://localhost:9090/company/employee`, contactCode)
+        .pipe(map(response => {
+            if(response.status){
+                return response.message;
+            }
+        }));
+    }
+
     update(company: Company) {
         return this.http.put<any>(`http://localhost:9090/company`, company);
     }
 
-    delete() {
+    deleteEmployee(id: number) {
+        return this.http.delete<any>(`http://localhost:9090/company/employee/${id}`);
+    }
+
+    deleteCompany() {
         return this.http.delete<any>(`http://localhost:9090/company`);
     }
 }

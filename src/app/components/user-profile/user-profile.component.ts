@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { AlertService, UserAccountService, UserService } from '../../_services';
 import { User, UserAccount } from 'src/app/_models';
+import { faClipboardList, faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-user-profile',
@@ -20,6 +21,7 @@ export class UserProfileComponent implements OnInit {
   loading = false;
   submittedUser = false;
   submittedPassword = false;
+  clipboardIcon = faClipboardCheck;
 
   constructor(
     private apiService: UserAccountService,
@@ -114,6 +116,17 @@ export class UserProfileComponent implements OnInit {
 
   onChangeDeletePassword(e){
     this.deletePassword = e.target.value;
+  }
+
+  onCopyContactCode(){
+    var textArea = document.createElement("textarea");
+    textArea.value = this.formUserAccount.contactCode;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("Copy");
+    textArea.remove();
+
+    document.getElementById("copyResult").innerHTML = 'copied!';
   }
 
   LoadUser(){

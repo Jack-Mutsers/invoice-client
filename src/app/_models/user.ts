@@ -4,6 +4,7 @@ export interface IUser{
     address: string;
     zipcode: string;
     city: string;
+    contactCode: string;
 }
 
 export class User implements IUser{
@@ -12,6 +13,7 @@ export class User implements IUser{
     address = null;
     zipcode = null;
     city = null;
+    contactCode = "";
 
     // load from api response
     public loadFromObject(object){
@@ -20,5 +22,6 @@ export class User implements IUser{
         this.address = object.address;
         this.zipcode = object.zipcode;
         this.city = object.city;
+        this.contactCode = object.contactCode;
     }
 }

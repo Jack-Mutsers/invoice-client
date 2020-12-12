@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService, CompanyService } from '../../_services';
 import { Company, User } from 'src/app/_models';
+import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-company-profile',
@@ -12,11 +13,14 @@ import { Company, User } from 'src/app/_models';
 export class CompanyProfileComponent implements OnInit {
   companyForm: FormGroup;
   formCompany: Company = new Company();
-  employeeList: User = new User();
+  employeeList: User[];
+  employeeToDelete: number = 0;
+  currentUser: number = 0;
   companyName: string = "";
   owner: boolean = false;
   loading = false;
   submitted = false;
+  trashIcon = faTrash;
 
   constructor(
     private apiService: CompanyService,
@@ -66,9 +70,29 @@ export class CompanyProfileComponent implements OnInit {
     );
   }
 
-  onDelete(){
+  onSetDelete(id: number){
+    this.employeeToDelete = id;
+  }
+
+  onDeleteEmployee(){
     if(this.owner){
-      this.apiService.delete().subscribe(
+      this.apiService.deleteEmployee(this.employeeToDelete).subscribe(
+        data => {
+          console.log(data);
+          this.alertService.success(data);
+          this.loadEmployees();
+        },
+        error => {
+          console.log(error);
+          this.alertService.error(error);
+        }
+      );
+    }
+  }
+
+  onDeleteCompany(){
+    if(this.owner){
+      this.apiService.deleteCompany().subscribe(
         data => {
           console.log(data);
           this.alertService.success(data);
@@ -82,12 +106,33 @@ export class CompanyProfileComponent implements OnInit {
     }
   }
 
+  onSendEmploymentRequest(){
+    var contactCode = (<HTMLInputElement>document.getElementById("contactForm")).value;
+    this.apiService.sendEmploymentRequest(contactCode).subscribe(
+      data => {
+        console.log(data);
+        this.alertService.success(data);
+        this.loadEmployees();
+        (<HTMLInputElement>document.getElementById("contactForm")).value = "";
+      },
+      error => {
+        console.log(error);
+        this.alertService.error(error);
+      }
+    );
+  }
+
   LoadCompany(){
     var accountData = JSON.parse(localStorage.getItem('currentUser'));
     this.formCompany.loadFromObject(accountData.company, accountData.companyId);
     this.owner = accountData.company.ownerId == accountData.id;
+    this.currentUser = accountData.userId;
     this.companyName = accountData.company.name;
 
+    this.loadEmployees();
+  }
+
+  loadEmployees(){
     this.apiService.getEmployees().subscribe(
       data => {
         this.employeeList = data;

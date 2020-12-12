@@ -1,6 +1,32 @@
 <div class="container">
     <h2>My profile</h2>
     <br>
+
+    
+    <div class="row">
+        <div class="col-md-2">
+            <label>Personal contact code: </label>
+        </div>
+        <div class="col-md-10">
+            <span id="contactContainer">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>{{formUserAccount.contactCode}}</td>
+                            <td><fa-icon (click)="onCopyContactCode();" class="icon" [icon]="clipboardIcon"></fa-icon></td>
+                            <td><span id="copyResult"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </span>
+        </div>
+    </div>
+
+    <br>
+    <hr>
+    <br>
+
+
     <h4>Update user information</h4>
     <br>
     <div class="row">
