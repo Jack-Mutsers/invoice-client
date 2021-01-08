@@ -1,0 +1,12 @@
+stages:
+  - deploy
+
+deploy:
+  # Build Docker container and push to Docker Hub
+  stage: deploy
+  script:
+    - sh deploy.sh
+  only:
+    refs:
+      - master
+

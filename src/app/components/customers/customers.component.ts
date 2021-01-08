@@ -38,7 +38,8 @@ export class CustomersComponent implements OnInit {
       name: ['', Validators.required],
       address: ['', Validators.required],
       zipcode: ['', Validators.required],
-      city: ['', [Validators.required]]
+      city: ['', [Validators.required]],
+      contactCode: ['', []]
     });
   }
 
@@ -54,7 +55,7 @@ export class CustomersComponent implements OnInit {
     }
 
     var customer = this.customerForm.value;
-    
+    console.log(customer);
     this.loading = true;
     let id = this.customerForm.value.id;
     if(id == 0 || id == null || id == undefined){

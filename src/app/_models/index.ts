@@ -6,4 +6,5 @@ export * from './productcategory';
 export * from './user';
 export * from './useraccount';
 export * from './role';
+export * from './invoice';
 export * from './fileRecord';

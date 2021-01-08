@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Customer } from '../_models/customer';
 import { map } from 'rxjs/operators';
+import { environment } from './../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class CustomerService {
     constructor(private http: HttpClient) { }
     
     getCustomers(){
-        return this.http.get<any>(`http://localhost:9090/customers`)
+        return this.http.get<any>(`http://` + environment.apiUrl + `/customers`)
         .pipe(map(response => {
             if(response.status){
                 return response.body;
@@ -17,7 +18,7 @@ export class CustomerService {
     }
     
     getCustomer(id: number){
-        return this.http.get<any>(`http://localhost:9090/customers/${id}`)
+        return this.http.get<any>(`http://` + environment.apiUrl + `/customers/${id}`)
         .pipe(map(response => {
             if(response.status){
                 return response.body;
@@ -26,14 +27,14 @@ export class CustomerService {
     }
 
     addCustomer(customer: Customer) {
-        return this.http.post<any>(`http://localhost:9090/customers`, customer);
+        return this.http.post<any>(`http://` + environment.apiUrl + `/customers`, customer);
     }
 
     update(customer: Customer) {
-        return this.http.put<any>(`http://localhost:9090/customers/`, customer);
+        return this.http.put<any>(`http://` + environment.apiUrl + `/customers/`, customer);
     }
 
     delete(id: number) {
-        return this.http.delete<any>(`http://localhost:9090/customers/${id}`);
+        return this.http.delete<any>(`http://` + environment.apiUrl + `/customers/${id}`);
     }
 }
