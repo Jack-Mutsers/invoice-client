@@ -2,6 +2,6 @@
     window["env"] = window["env"] || {};
   
     // Environment variables
-    window["env"]["apiUrl"] = "localhost:9091";
+    window["env"]["apiUrl"] = "localhost:9090";
     window["env"]["debug"] = true;
   })(this);
