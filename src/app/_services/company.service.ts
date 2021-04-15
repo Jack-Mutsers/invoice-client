@@ -6,10 +6,12 @@ import { environment } from './../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class CompanyService {
+    private apiUrl: string = window["env"]["apiUrl"];
+	private SERVER_URL: string = "http://"+ this.apiUrl +"/company";
     constructor(private http: HttpClient) { }
     
     getCompanys(){
-        return this.http.get<any>(`http://` + environment.apiUrl + `/company/all`)
+        return this.http.get<any>(this.SERVER_URL + `/all`)
         .pipe(map(response => {
             if(response.status){
                 return response.body;
@@ -18,7 +20,7 @@ export class CompanyService {
     }
     
     getCompany(){
-        return this.http.get<any>(`http://` + environment.apiUrl + `/company`)
+        return this.http.get<any>(this.SERVER_URL)
         .pipe(map(response => {
             if(response.status){
                 return response.body;
@@ -27,7 +29,7 @@ export class CompanyService {
     }
 
     getEmployees(){
-        return this.http.get<any>(`http://` + environment.apiUrl + `/company/employees`)
+        return this.http.get<any>(this.SERVER_URL + `/employees`)
         .pipe(map(response => {
             if(response.status){
                 return response.body;
@@ -36,7 +38,7 @@ export class CompanyService {
     }
 
     addCompany(company: Company) {
-        return this.http.post<any>(`http://` + environment.apiUrl + `/company`, company)
+        return this.http.post<any>(this.SERVER_URL, company)
         .pipe(map(response => {
             if(response.status){
                 return response.body;
@@ -45,7 +47,7 @@ export class CompanyService {
     }
 
     sendEmploymentRequest(contactCode: string) {
-        return this.http.post<any>(`http://` + environment.apiUrl + `/company/employee`, contactCode)
+        return this.http.post<any>(this.SERVER_URL + `/employee`, contactCode)
         .pipe(map(response => {
             if(response.status){
                 return response.message;
@@ -54,14 +56,14 @@ export class CompanyService {
     }
 
     update(company: Company) {
-        return this.http.put<any>(`http://` + environment.apiUrl + `/company`, company);
+        return this.http.put<any>(this.SERVER_URL, company);
     }
 
     deleteEmployee(id: number) {
-        return this.http.delete<any>(`http://` + environment.apiUrl + `/company/employee/${id}`);
+        return this.http.delete<any>(this.SERVER_URL + `/employee/${id}`);
     }
 
     deleteCompany() {
-        return this.http.delete<any>(`http://` + environment.apiUrl + `/company`);
+        return this.http.delete<any>(this.SERVER_URL);
     }
 }

@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from './../../environments/environment';
 
 import { UserAccount } from '../_models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
+    private apiUrl: string = window["env"]["apiUrl"];
     private currentUserSubject: BehaviorSubject<UserAccount>;
     private currentUserToken: BehaviorSubject<String>;
     public currentUser: Observable<UserAccount>;
@@ -34,8 +34,8 @@ export class AuthenticationService {
             // withCredentials: true
         }
 
-        console.log(environment.apiUrl);
-        return this.http.post<any>(`http://` + environment.apiUrl + `/authenticate`, null, header)
+        console.log(this.apiUrl);
+        return this.http.post<any>(`http://` + this.apiUrl + `/authenticate`, null, header)
             .pipe(map(response => {
                 var user = response.body;
                 if (user && user.token){

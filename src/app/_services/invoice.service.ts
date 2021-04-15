@@ -6,11 +6,12 @@ import { environment } from './../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class InvoiceService {
-	SERVER_URL: string = "http://` + environment.apiUrl + `/Invoice/";
+    private apiUrl: string = window["env"]["apiUrl"];
+    private SERVER_URL: string = "http://"+ this.apiUrl +"/Invoice";
     constructor(private http: HttpClient) { }
     
     getIncommingInvoices(contactCode: string){
-        return this.http.get<any>(`http://` + environment.apiUrl + `/Invoice/${contactCode}`)
+        return this.http.get<any>(this.SERVER_URL + `/${contactCode}`)
         .pipe(map(response => {
             if(response.status){
                 return response.body;
@@ -19,7 +20,7 @@ export class InvoiceService {
     }
 
     getOutgoingInvoices(){
-        return this.http.get<any>(`http://` + environment.apiUrl + `/Invoice`)
+        return this.http.get<any>(this.SERVER_URL)
         .pipe(map(response => {
             if(response.status){
                 return response.body;
@@ -28,7 +29,7 @@ export class InvoiceService {
     }
     
     getInvoice(id: number){
-        return this.http.get<any>(`http://` + environment.apiUrl + `/Invoice/${id}`)
+        return this.http.get<any>(this.SERVER_URL + `/${id}`)
         .pipe(map(response => {
             if(response.status){
                 return response.body;
@@ -44,14 +45,14 @@ export class InvoiceService {
     }
 
     addInvoice(invoice: Invoice) {
-        return this.http.post<any>(`http://` + environment.apiUrl + `/Invoice`, invoice);
+        return this.http.post<any>(this.SERVER_URL, invoice);
     }
 
     update(invoice: Invoice) {
-        return this.http.put<any>(`http://` + environment.apiUrl + `/Invoice/`, invoice);
+        return this.http.put<any>(this.SERVER_URL, invoice);
     }
 
     delete(id: number) {
-        return this.http.delete<any>(`http://` + environment.apiUrl + `/Invoice/${id}`);
+        return this.http.delete<any>(this.SERVER_URL + `/${id}`);
     }
 }

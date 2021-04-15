@@ -7,7 +7,8 @@ import { environment } from './../../environments/environment';
   providedIn: 'root'
 })
 export class UploadService {
-	SERVER_URL: string = "http://"+ environment.apiUrl +"/upload/";
+  private apiUrl: string = window["env"]["apiUrl"];
+	private SERVER_URL: string = "http://"+ this.apiUrl +"/upload/";
   constructor(private http: HttpClient) { }
 
   public upload(formData: FormData) {
